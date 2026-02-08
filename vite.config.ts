@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { copyFileSync, cpSync, existsSync } from 'fs';
+import { fileURLToPath } from 'url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
   // Source directory
@@ -13,8 +16,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    // Generate sourcemaps for debugging
-    sourcemap: true,
+    // Disable sourcemaps in production to save storage/bandwidth
+    sourcemap: false,
   },
 
   // Dev server configuration

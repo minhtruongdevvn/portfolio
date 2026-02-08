@@ -41,7 +41,27 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }} --delete --exclude ".git/*"
+          # Upload HTML files with short cache (no content hash, need frequent updates)
+          aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }} \
+            --delete \
+            --exclude "*" \
+            --include "*.html" \
+            --cache-control "max-age=300, must-revalidate"
+
+          # Upload all assets (Vite hashed JS/CSS + images) with long cache
+          aws s3 sync dist/assets/ s3://${{ secrets.AWS_S3_BUCKET }}/assets/ \
+            --delete \
+            --cache-control "max-age=31536000, immutable"
+
+          # Upload pics_optimized with long cache (only add, never edit)
+          aws s3 sync dist/pics_optimized/ s3://${{ secrets.AWS_S3_BUCKET }}/pics_optimized/ \
+            --delete \
+            --cache-control "max-age=31536000, immutable"
+
+          # Upload tabs with moderate cache (HTML content may update)
+          aws s3 sync dist/tabs/ s3://${{ secrets.AWS_S3_BUCKET }}/tabs/ \
+            --delete \
+            --cache-control "max-age=86400"
 
       - name: Invalidate CloudFront
         env:
