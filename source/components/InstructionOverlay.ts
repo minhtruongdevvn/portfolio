@@ -96,7 +96,7 @@ export class InstructionOverlay {
 
         const subtextDiv = document.createElement('div');
         subtextDiv.className = 'instruction-subtext';
-        subtextDiv.textContent = 'Click to explore my portfolio';
+        subtextDiv.textContent = 'Click the Window button explore';
 
         // Arrow container to rotate it properly if needed
         const arrowDiv = document.createElement('div');

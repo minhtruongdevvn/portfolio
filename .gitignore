@@ -4,6 +4,11 @@ node_modules/
 # Build output
 dist/
 
+# Environment variables
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/
 .idea/
@@ -18,3 +23,5 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+

@@ -1,21 +1,25 @@
-export const BASE_URL = 'https://conrad-truong.online/';  // Empty string for local paths
+import { SVG_DATA_URIS } from './svg-data.js';
+
+export const BASE_URL = import.meta.env.VITE_BASE_URL || '';
 
 // Icon paths
 export const ICONS = {
-  computer: `${BASE_URL}assets/icons/computer.svg`,
-  recycleBin: `${BASE_URL}assets/icons/recycle-bin.svg`,
-  fileExplorer: `${BASE_URL}assets/icons/file-explorer.svg`,
-  steam: `${BASE_URL}assets/icons/steam.svg`,
-  photos: `${BASE_URL}assets/icons/photos.svg`,
-  movies: `${BASE_URL}assets/icons/movies.svg`,
-  briefcase: `${BASE_URL}assets/icons/briefcase.svg`,
-  graduation: `${BASE_URL}assets/icons/graduation.svg`,
-  projects: `${BASE_URL}assets/icons/projects.svg`,
-  music: `${BASE_URL}assets/icons/music.svg`,
-  windowsLogo: `${BASE_URL}assets/icons/windows-logo.svg`,
-  volume: `${BASE_URL}assets/icons/volume.svg`,
-  network: `${BASE_URL}assets/icons/network.svg`,
-  battery: `${BASE_URL}assets/icons/battery.svg`,
+  computer: SVG_DATA_URIS['computer'],
+  recycleBin: SVG_DATA_URIS['recycle-bin'],
+  fileExplorer: SVG_DATA_URIS['file-explorer'],
+  steam: SVG_DATA_URIS['steam'],
+  photos: SVG_DATA_URIS['photos'],
+  movies: SVG_DATA_URIS['movies'],
+  briefcase: SVG_DATA_URIS['briefcase'],
+  graduation: SVG_DATA_URIS['graduation'],
+  projects: SVG_DATA_URIS['projects'],
+  music: SVG_DATA_URIS['music'],
+  windowsLogo: SVG_DATA_URIS['windows-logo'],
+  volume: SVG_DATA_URIS['volume'],
+  network: SVG_DATA_URIS['network'],
+  battery: SVG_DATA_URIS['battery'],
+  textEditor: SVG_DATA_URIS['text-editor'], // Added
+  iframe: SVG_DATA_URIS['iframe'], // Added
 } as const;
 
 // Wallpaper paths

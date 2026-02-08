@@ -16,7 +16,7 @@ import type {
   MenuEventData,
   WindowEventData,
 } from "../types/index.js";
-import { BASE_URL } from "../config/assets.js";
+import { ICONS } from "../config/assets.js";
 
 export interface WindowStateData {
   openWindows: Map<string, Window>;
@@ -114,7 +114,7 @@ export class WindowState extends BaseState<WindowStateData> {
   }): void {
     const window = new FileExplorer({
       ...config,
-      icon: `${BASE_URL}assets/icons/file-explorer.svg`,
+      icon: ICONS.fileExplorer,
       onClose: () => this.closeWindow(config.id),
       onFileOpen: (file: FileItem) => this.handleFileOpen(file, config.id),
     });
@@ -133,7 +133,7 @@ export class WindowState extends BaseState<WindowStateData> {
   }): void {
     const window = new IframeViewer({
       ...config,
-      icon: `${BASE_URL}assets/icons/iframe.svg`,
+      icon: ICONS.iframe,
       onClose: () => this.closeWindow(config.id),
     });
 
@@ -154,7 +154,7 @@ export class WindowState extends BaseState<WindowStateData> {
       ...config,
       initialText: config.text,
       readOnly: config.readOnly,
-      icon: `${BASE_URL}assets/icons/text-editor.svg`,
+      icon: ICONS.textEditor,
       onClose: () => this.closeWindow(config.id),
     });
 
@@ -171,14 +171,14 @@ export class WindowState extends BaseState<WindowStateData> {
       this.openIframeViewer({
         id: windowId,
         title: file.name,
-        icon: "/assets/icons/file-explorer.svg",
+        icon: ICONS.fileExplorer,
         url: file.url,
       });
     } else if (file.contentType === "text") {
       this.openTextEditor({
         id: windowId,
         title: file.name,
-        icon: "/assets/icons/file-explorer.svg",
+        icon: ICONS.fileExplorer,
         text: file.text || "",
         readOnly: true,
       });

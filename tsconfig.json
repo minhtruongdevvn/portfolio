@@ -4,15 +4,17 @@
     "target": "ES2020",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ES2020",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
 
     /* Emit */
     "outDir": "./dist",
-    "rootDir": "./source",
     "sourceMap": true,
     "removeComments": false,
     "declaration": false,
     "declarationMap": false,
+
+    /* Vite specific */
+    "types": ["vite/client"],
 
     /* Interop Constraints */
     "esModuleInterop": true,
@@ -41,7 +43,8 @@
     "checkJs": false
   },
   "include": [
-    "source/**/*.ts"
+    "source/**/*.ts",
+    "vite-env.d.ts"
   ],
   "exclude": [
     "node_modules",
