@@ -544,18 +544,11 @@
                         removes green color cast from the subject edges, while <code>split=2</code> enables simultaneous
                         encoding for maximum efficiency.
                     </p>
-                    <div class="code-block" style="white-space: pre; overflow-x: auto;"><span class="cmd">ffmpeg</span>
-                        <span class="flag">-i</span> <span class="arg">input.mp4</span> \
-                        <span class="flag">-filter_complex</span> \
-                        <span
-                            class="val">"[0:v]colorkey=0x00FF00:0.15:0.1,despill=green,scale='min(720,iw)':'-2',split=2[android][ios]"</span>
-                        \
-                        <span class="flag">-map</span> <span class="val">"[android]"</span> <span
-                            class="flag">-c:v</span> <span class="val">libvpx-vp9</span> <span
-                            class="arg">out.webm</span> \
-                        <span class="flag">-map</span> <span class="val">"[ios]"</span> <span class="flag">-tag:v</span>
-                        <span class="val">hvc1</span> <span class="arg">out.mov</span>
-                    </div>
+                    <div class="code-block" style="white-space: pre; overflow-x: auto;"><span class="cmd">ffmpeg</span> <span class="flag">-i</span> <span class="arg">input.mp4</span> \
+    <span class="flag">-filter_complex</span> \
+    <span class="val">"[0:v]colorkey=0x00FF00:0.15:0.1,despill=green,scale='min(720,iw)':'-2',split=2[android][ios]"</span> \
+    <span class="flag">-map</span> <span class="val">"[android]"</span> <span class="flag">-c:v</span> <span class="val">libvpx-vp9</span> <span class="arg">out.webm</span> \
+    <span class="flag">-map</span> <span class="val">"[ios]"</span> <span class="flag">-tag:v</span> <span class="val">hvc1</span> <span class="arg">out.mov</span></div>
                 </div>
 
                 <!-- Visualization -->
