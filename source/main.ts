@@ -1,3 +1,25 @@
+// Import CSS files (Vite will bundle them)
+import "../css/reset.css";
+import "../css/main.css";
+import "../css/components/desktop.css";
+import "../css/components/desktop-icon.css";
+import "../css/components/selection-box.css";
+import "../css/components/dropdown-menu.css";
+import "../css/components/taskbar.css";
+import "../css/components/start-button.css";
+import "../css/components/start-menu.css";
+import "../css/components/instruction-overlay.css";
+import "../css/components/taskbar-app.css";
+import "../css/components/system-tray.css";
+import "../css/components/tooltip.css";
+import "../css/components/notification.css";
+import "../css/components/window.css";
+import "../css/components/file-explorer.css";
+import "../css/components/iframe-viewer.css";
+import "../css/components/text-editor.css";
+import "../css/utilities/animations.css";
+import "../css/responsive.css";
+
 import {
   eventBus,
   selectionState,

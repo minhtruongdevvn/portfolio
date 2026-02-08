@@ -31,7 +31,7 @@ export default defineConfig({
     {
       name: 'copy-static-assets',
       writeBundle() {
-        const staticDirs = ['assets', 'css', 'tabs', 'pics_optimized'];
+        const staticDirs = ['assets', 'tabs', 'pics_optimized'];
         const staticFiles = ['rate-limit-error.html'];
 
         // Copy directories using Node.js fs.cpSync
