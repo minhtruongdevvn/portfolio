@@ -20,12 +20,12 @@ export class StartMenu {
    * Render the start menu
    */
   render(): HTMLElement {
-    this.element = document.createElement('div');
-    this.element.className = 'start-menu';
+    this.element = document.createElement("div");
+    this.element.className = "start-menu";
 
     // Header
-    const header = document.createElement('div');
-    header.className = 'start-menu__header';
+    const header = document.createElement("div");
+    header.className = "start-menu__header";
     header.innerHTML = `
       <img src="assets/avatar.png" alt="Profile" class="start-menu__avatar" onerror="this.src='https://ui-avatars.com/api/?name=Minh+Truong&background=0D8ABC&color=fff'">
       <div class="start-menu__user-info">
@@ -35,12 +35,12 @@ export class StartMenu {
     `;
 
     // Content
-    const content = document.createElement('div');
-    content.className = 'start-menu__content';
+    const content = document.createElement("div");
+    content.className = "start-menu__content";
 
     // Left Pane (Bio & Skills)
-    const leftPane = document.createElement('div');
-    leftPane.className = 'start-menu__left-pane';
+    const leftPane = document.createElement("div");
+    leftPane.className = "start-menu__left-pane";
     leftPane.innerHTML = `
       <div class="start-menu__section-title">About</div>
       <p class="start-menu__bio">
@@ -83,8 +83,8 @@ export class StartMenu {
     `;
 
     // Right Pane (Contact & Personal)
-    const rightPane = document.createElement('div');
-    rightPane.className = 'start-menu__right-pane';
+    const rightPane = document.createElement("div");
+    rightPane.className = "start-menu__right-pane";
     rightPane.innerHTML = `
       <div class="start-menu__contact-item">
         <div class="start-menu__label">LinkedIn</div>
@@ -130,6 +130,7 @@ export class StartMenu {
           <span class="start-menu__tag">Gaming</span>
           <span class="start-menu__tag">Cooking</span>
           <span class="start-menu__tag">Gym</span>
+          <span class="start-menu__tag">New Tech Research</span>
         </div>
       </div>
 
@@ -156,8 +157,8 @@ export class StartMenu {
     content.appendChild(rightPane);
 
     // Footer
-    const footer = document.createElement('div');
-    footer.className = 'start-menu__footer';
+    const footer = document.createElement("div");
+    footer.className = "start-menu__footer";
     footer.innerHTML = `
       <button class="start-menu__shutdown-btn" onclick="window.location.reload()">
         <span>⏻</span> Restart System
@@ -169,7 +170,7 @@ export class StartMenu {
     this.element.appendChild(footer);
 
     // Prevent clicks inside menu from closing it
-    this.element.addEventListener('click', (e) => {
+    this.element.addEventListener("click", (e) => {
       e.stopPropagation();
     });
 
@@ -188,12 +189,12 @@ export class StartMenu {
     // Position menu above the start button
     if (this.element) {
       this.element.style.bottom = `${buttonRect.height}px`;
-      this.element.style.left = '0';
+      this.element.style.left = "0";
 
       // Force reflow
       this.element.offsetHeight; // trigger reflow
 
-      this.element.classList.add('start-menu--visible');
+      this.element.classList.add("start-menu--visible");
       this.isVisible = true;
 
       // Setup click outside listener
@@ -206,7 +207,7 @@ export class StartMenu {
    */
   hide(): void {
     if (this.element && this.isVisible) {
-      this.element.classList.remove('start-menu--visible');
+      this.element.classList.remove("start-menu--visible");
       this.isVisible = false;
 
       // Remove after transition
@@ -239,20 +240,24 @@ export class StartMenu {
     this.clickOutsideHandler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       // If clicking outside menu (and not on start button itself - handled by preventDefault in main logic usually)
-      if (this.element && !this.element.contains(target) && !target.closest('.start-button')) {
+      if (
+        this.element &&
+        !this.element.contains(target) &&
+        !target.closest(".start-button")
+      ) {
         this.hide();
         this.onClose();
       }
     };
 
-    // items inside taskbar (like clock) shouldn't close it instantly if logic is separated, 
+    // items inside taskbar (like clock) shouldn't close it instantly if logic is separated,
     // but typically clicking anywhere else closes start menu
-    document.addEventListener('click', this.clickOutsideHandler);
+    document.addEventListener("click", this.clickOutsideHandler);
   }
 
   private removeClickOutside(): void {
     if (this.clickOutsideHandler) {
-      document.removeEventListener('click', this.clickOutsideHandler);
+      document.removeEventListener("click", this.clickOutsideHandler);
       this.clickOutsideHandler = null;
     }
   }
