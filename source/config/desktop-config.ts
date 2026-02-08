@@ -227,6 +227,22 @@ export const DESKTOP_ICONS: IconConfig[] = [
       { id: "properties", label: "Properties", action: "properties" },
     ],
   },
+  {
+    id: "ai",
+    name: "AI",
+    icon: ICONS.robot,
+    column: "right",
+    position: { y: 320 },
+    contentType: "text",
+    contentData: {
+      text: "I'm about to master the technology of Artificial Intelligence. Stay tuned for amazing AI-powered applications!",
+    },
+    menuItems: [
+      { id: "open", label: "Open", action: "open" },
+      { type: "separator" },
+      { id: "properties", label: "Properties", action: "properties" },
+    ],
+  },
 ];
 
 export const TASKBAR_APPS: TaskbarAppConfig[] = [

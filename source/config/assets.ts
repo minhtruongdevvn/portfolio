@@ -20,6 +20,7 @@ export const ICONS = {
   battery: SVG_DATA_URIS['battery'],
   textEditor: SVG_DATA_URIS['text-editor'], // Added
   iframe: SVG_DATA_URIS['iframe'], // Added
+  robot: SVG_DATA_URIS['robot'],
 } as const;
 
 // Wallpaper paths
