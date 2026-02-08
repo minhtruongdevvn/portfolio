@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-aws: #ff9900;
+            --accent-vue: #42b883;
+            --accent-azure: #0078d4;
+            --accent-net: #512bd4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn Down 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-radius: 2px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(59, 130, 246, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 2rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover::before {
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .company {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievement-item {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .achievement-item::before {
+            content: '➝';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 0.9rem;
+            top: 0.1rem;
+        }
+
+        .highlight {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* Specific accents for stacks */
+        .stack-aws .tag.tech-aws {
+            color: var(--accent-aws);
+            border-color: rgba(255, 153, 0, 0.3);
+            background: rgba(255, 153, 0, 0.1);
+        }
+
+        .stack-aws .tag.tech-vue {
+            color: var(--accent-vue);
+            border-color: rgba(66, 184, 131, 0.3);
+            background: rgba(66, 184, 131, 0.1);
+        }
+
+        .stack-azure .tag.tech-azure {
+            color: var(--accent-azure);
+            border-color: rgba(0, 120, 212, 0.3);
+            background: rgba(0, 120, 212, 0.1);
+        }
+
+        .stack-azure .tag.tech-net {
+            color: var(--accent-net);
+            border-color: rgba(81, 43, 212, 0.3);
+            background: rgba(81, 43, 212, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .timeline {
+                padding-left: 1rem;
+            }
+
+            .card::before {
+                left: -1.6rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Professional Journey</h1>
+            <p class="subtitle">Building scalable systems & intuitive interfaces</p>
+        </header>
+
+        <div class="timeline">
+
+            <!-- Experience 1: AWS / Full Stack -->
+            <div class="card stack-aws delay-1">
+                <div class="card-header">
+                    <div>
+                        <div class="role-title">Full Stack Engineer</div>
+                        <div class="company">Centre for Change and Complexity in Learning (C3L)</div>
+                        <div style="font-size: 0.9rem; color: #94a3b8; margin-top: 0.25rem;">May 2024 - Jan 2025 ·
+                            Contract</div>
+                        <div style="font-size: 0.9rem; color: #94a3b8;">Adelaide, South Australia, Australia · Hybrid
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span class="tag tech-aws">AWS</span>
+                        <span class="tag tech-vue">Vue.js</span>
+                        <span class="tag">Laravel</span>
+                        <span class="tag">Flutter</span>
+                        <span class="tag">DynamoDB</span>
+                    </div>
+                </div>
+
+                <ul class="achievements">
+                    <li class="achievement-item">
+                        Designed and implemented comprehensive <span class="highlight">user interaction tracking</span>
+                        (clicks, scroll, playback) to enable deep behavioral data analysis.
+                    </li>
+                    <li class="achievement-item">
+                        Architected a cost-efficient data pipeline for eye-tracking data using <span
+                            class="highlight">AWS Lambda & DynamoDB</span>. Handles 500K+ writes/month for ~$5/month
+                        with 5-second streaming intervals.
+                    </li>
+                    <li class="achievement-item">
+                        Optimized backend algorithms, slashing response times from <span class="highlight">2+ seconds to
+                            sub-second</span> latency for a smooth user experience.
+                    </li>
+                    <li class="achievement-item">
+                        Delivered a full-stack data collection platform in just <span class="highlight">2 months</span>:
+                        Vue.js admin console, Flutter mobile app (iOS/Android), and Spring Boot REST API.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Experience 2: Azure / .NET -->
+            <div class="card stack-azure delay-2">
+                <div class="card-header">
+                    <div>
+                        <div class="role-title">Software Engineer</div>
+                        <div class="company">NashTech</div>
+                        <div style="font-size: 0.9rem; color: #94a3b8; margin-top: 0.25rem;">Nov 2022 - Jul 2023 ·
+                            Full-time</div>
+                        <div style="font-size: 0.9rem; color: #94a3b8;">Ho Chi Minh City, Vietnam · On-site</div>
+                    </div>
+                    <div class="tags">
+                        <span class="tag tech-azure">Azure</span>
+                        <span class="tag tech-net">.NET Core</span>
+                        <span class="tag">Microservices</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">SQL Server</span>
+                    </div>
+                </div>
+
+                <ul class="achievements">
+                    <li class="achievement-item">
+                        Developed a multi-region data synchronization system using <span class="highlight">Azure
+                            Functions</span>,
+                        executing 6 concurrent async calls to sync data across 6 regions in real-time.
+                    </li>
+                    <li class="achievement-item">
+                        Implemented robust <span class="highlight">Authentication & Authorization</span> for .NET
+                        microservices, integrated with IDP server to secure business-critical APIs.
+                    </li>
+                    <li class="achievement-item">
+                        Optimized <span class="highlight">Azure DevOps</span> environments for QA team, reducing testing
+                        feedback loops and accelerating release cycles.
+                    </li>
+                    <li class="achievement-item">
+                        Implemented automated email workflows using <span class="highlight">SendGrid</span>, deployed
+                        across 6 countries with localization support.
+                    </li>
+                    <li class="achievement-item">
+                        Diagnosed and resolved a critical bug in .NET agent on POS systems, restoring functionality for
+                        retail operations.
+                    </li>
+                    <li class="achievement-item">
+                        Identified and fixed numerous production bugs across microservices and third-party integrations,
+                        improving system stability.
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Add subtle parallax effect to cards on scroll
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = (rect.left + rect.width / 2) / window.innerWidth;
+                const cardY = (rect.top + rect.height / 2) / window.innerHeight;
+
+                const moveX = (mouseX - cardX) * 10;
+                const moveY = (mouseY - cardY) * 10;
+
+                card.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

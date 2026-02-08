@@ -1,0 +1,110 @@
+/**
+ * Main CSS - Windows 7 Theme Variables and Global Styles
+ */
+
+:root {
+  /* Taskbar */
+  --win7-taskbar-height: 40px;
+  --win7-glass-bg: rgba(31, 49, 72, 0.85);
+  --win7-glass-border: rgba(255, 255, 255, 0.2);
+
+  /* Colors */
+  --win7-blue: #3C89D2;
+  --win7-selection-blue: rgba(60, 137, 210, 0.3);
+  --win7-hover-blue: rgba(60, 137, 210, 0.15);
+  --win7-dark-blue: #2A5A8A;
+  --win7-light-blue: #4FA3E8;
+
+  /* Desktop - wallpaper set via JavaScript from assets.js config */
+  --desktop-bg: none;
+
+  /* Icons */
+  --icon-size: 48px;
+  --icon-label-font: 11px;
+  --icon-spacing: 8px;
+  --icon-padding: 6px;
+
+  /* Menus */
+  --menu-bg: #F0F0F0;
+  --menu-border: #707070;
+  --menu-item-hover: #E5F3FF;
+  --menu-text: #000000;
+  --menu-separator: #D7D7D7;
+  --menu-border-radius: 0;
+
+  /* Shadows */
+  --shadow-icon: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-menu: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --shadow-taskbar: 0 -1px 5px rgba(0, 0, 0, 0.3);
+  --shadow-text: 1px 1px 2px rgba(0, 0, 0, 0.8);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-medium: 0.25s ease;
+
+  /* Z-index layers */
+  --z-desktop: 1;
+  --z-taskbar: 100;
+  --z-menu: 200;
+  --z-window: 50;
+}
+
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background: var(--desktop-bg);
+  user-select: none;
+}
+
+/* Prevent dragging default browser ghost image issues */
+img {
+  pointer-events: none;
+}
+
+/* Scrollbar styling (Windows 7 style) */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E5E5E5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CDCDCD;
+  border: 1px solid #ABABAB;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B3B3B3;
+}
+
+::-webkit-scrollbar-corner {
+  background: #E5E5E5;
+}
+
+/* Utility classes */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-fast);
+}
+
+.fade-out {
+  animation: fadeOut var(--transition-fast);
+}

@@ -1,0 +1,14 @@
+/**
+ * Selection Box Component Styles
+ * Visual box for multi-selecting desktop icons
+ */
+
+.selection-box {
+  position: absolute;
+  display: none;
+  border: 1px solid var(--win7-blue);
+  background-color: rgba(60, 137, 210, 0.2);
+  pointer-events: none;
+  z-index: 100;
+  box-shadow: 0 0 4px rgba(60, 137, 210, 0.5);
+}

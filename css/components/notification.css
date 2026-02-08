@@ -1,0 +1,151 @@
+/**
+ * Notification Component Styles
+ * Windows 7-style toast notifications
+ */
+
+/* Container for all notifications */
+.notification-container {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  max-width: 350px;
+  width: 100%;
+}
+
+/* Individual notification */
+.notification {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(31, 49, 72, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  pointer-events: auto;
+  cursor: default;
+  animation: slideIn 0.3s ease-out;
+  transform-origin: right center;
+}
+
+/* Notification types with accent colors */
+.notification--success {
+  border-left: 4px solid #4CAF50;
+}
+
+.notification--error {
+  border-left: 4px solid #F44336;
+}
+
+.notification--warning {
+  border-left: 4px solid #FF9800;
+}
+
+.notification--info {
+  border-left: 4px solid #2196F3;
+}
+
+/* Icon */
+.notification__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+/* Content */
+.notification__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification__message {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Close button */
+.notification__close {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 24px;
+  line-height: 1;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  margin-left: 4px;
+}
+
+.notification__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.notification__close:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%) scale(0.9);
+  }
+}
+
+/* Closing state */
+.notification--closing {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Mobile responsive */
+@media (max-width: 700px) {
+  .notification-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+
+  .notification {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+}

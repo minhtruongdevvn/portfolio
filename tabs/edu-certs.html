@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education & Certifications</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            /* Theme: "Professional Light" - Clean White, Slate Grey, Blue Accents */
+            --bg-color: #f8fafc;
+            /* Slate 50 */
+            --card-bg: #ffffff;
+            /* White */
+            --border-color: #e2e8f0;
+            /* Slate 200 */
+
+            --text-primary: #0f172a;
+            /* Slate 900 */
+            --text-secondary: #64748b;
+            /* Slate 500 */
+
+            --primary: #0ea5e9;
+            /* Sky 500 */
+            --primary-light: #e0f2fe;
+            /* Sky 100 */
+
+            --accent-teal: #14b8a6;
+            /* Teal 500 */
+            --accent-teal-light: #ccfbf1;
+            /* Teal 100 */
+
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        /* --- Components --- */
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: #cbd5e1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .date-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: #f1f5f9;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Skill Tags --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 500;
+            background: var(--bg-color);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary-light);
+        }
+
+        .skill-tag.highlight {
+            background: var(--accent-teal-light);
+            color: var(--accent-teal);
+            border-color: var(--accent-teal-light);
+        }
+
+        /* --- Certifications Layout --- */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cert-link {
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: auto;
+        }
+
+        .cert-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="animate-in delay-1">
+            <h1>Education & Credentials</h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; line-height: 1.6;">
+                Specialized in Cyber Security and Cloud Architecture, backed by rigorous academic training and
+                industry-recognized certifications.
+            </p>
+        </header>
+
+        <!-- Education -->
+        <section class="animate-in delay-2">
+            <div class="section-title">Academic Background</div>
+
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+                <!-- UniSA -->
+                <div class="card">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h2>University of South Australia</h2>
+                            <h3>Master of Information Technology (Cyber Security)</h3>
+                        </div>
+                        <span class="date-badge">Feb 2024 - Feb 2026</span>
+                    </div>
+
+                    <div class="skills-container">
+                        <span class="skill-tag highlight">Security Architecture Design</span>
+                        <span class="skill-tag highlight">Enterprise Security</span>
+                        <span class="skill-tag highlight">Network Security</span>
+                        <span class="skill-tag">CCNA</span>
+                    </div>
+                </div>
+
+                <!-- Greenwich -->
+                <div class="card">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h2>University of Greenwich</h2>
+                            <h3>Bachelor's Degree, Computer Science</h3>
+                        </div>
+                        <span class="date-badge">July 2020 - May 2023</span>
+                    </div>
+
+                    <div class="skills-container">
+                        <span class="skill-tag">.NET Framework</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Elasticsearch</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Business Analysis</span>
+                        <span class="skill-tag highlight">Full-Stack Development</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="animate-in delay-3">
+            <div class="section-title">Professional Certifications</div>
+
+            <div class="cert-grid">
+
+                <!-- AWS -->
+                <div class="card cert-card">
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                        <span style="font-size:1.5rem;">☁️</span>
+                        <div>
+                            <h2 style="margin:0; font-size:1.1rem;">AWS Certified Developer</h2>
+                            <span style="color:var(--text-secondary); font-size:0.85rem;">Associate Level</span>
+                        </div>
+                    </div>
+
+                    <div class="skills-container">
+                        <span class="skill-tag">Serverless (Lambda)</span>
+                        <span class="skill-tag">DynamoDB</span>
+                        <span class="skill-tag">API Gateway</span>
+                        <span class="skill-tag highlight">Cloud Native Dev</span>
+                    </div>
+
+                    <a href="https://www.credly.com/badges/d5bf8f9b-9096-4871-9faf-f192084e1d4f/linked_in_profile"
+                        target="_blank" class="cert-link">
+                        Verify Credential ↗
+                    </a>
+                </div>
+
+                <!-- Azure -->
+                <div class="card cert-card">
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                        <span style="font-size:1.5rem;">🔷</span>
+                        <div>
+                            <h2 style="margin:0; font-size:1.1rem;">Microsoft Azure</h2>
+                            <span style="color:var(--text-secondary); font-size:0.85rem;">Fundamentals</span>
+                        </div>
+                    </div>
+
+                    <div class="skills-container">
+                        <span class="skill-tag">Cloud Concepts</span>
+                        <span class="skill-tag">Azure Architecture</span>
+                        <span class="skill-tag">Governance</span>
+                        <span class="skill-tag highlight">Compliance</span>
+                    </div>
+
+                    <a href="https://learn.microsoft.com/api/credentials/share/en-au/TruongMinhConrad-3000/10215B18957C63F6?sharingId=F862B4BCE817B4CB"
+                        target="_blank" class="cert-link">
+                        Verify Credential ↗
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>

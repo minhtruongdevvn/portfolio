@@ -1,0 +1,289 @@
+/**
+ * Start Menu Component Styles
+ * A modern take on the Windows 7 Start Menu profile card
+ */
+
+.start-menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 450px;
+    /* Wider than typical Win7 to fit profile info */
+    max-width: 90vw;
+    max-height: 85vh;
+    background: rgba(26, 54, 84, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    z-index: 2000;
+    /* Above windows (1000) and taskbar (100) */
+    font-family: 'Segoe UI', sans-serif;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    overflow: hidden;
+}
+
+.start-menu--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Header Section (Profile) */
+.start-menu__header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.start-menu__avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-right: 15px;
+    object-fit: cover;
+    background-color: #ddd;
+    /* Fallback */
+}
+
+.start-menu__user-info {
+    flex: 1;
+}
+
+.start-menu__name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.start-menu__title {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Content Area */
+.start-menu__content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: 500px;
+    /* Fixed height for scrollable content */
+}
+
+/* Left Pane (White-ish style) */
+.start-menu__left-pane {
+    flex: 5;
+    background: #fff;
+    color: #333;
+    padding: 15px;
+    overflow-y: auto;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+}
+
+.start-menu__section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2c5282;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.start-menu__bio {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #4a5568;
+}
+
+.start-menu__features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.start-menu__feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.start-menu__feature-icon {
+    color: #3182ce;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+/* Right Pane (Darker Blue) */
+.start-menu__right-pane {
+    flex: 4;
+    background: transparent;
+    /* Inherits main background */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.start-menu__contact-item {
+    margin-bottom: 12px;
+}
+
+.start-menu__label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.start-menu__value {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.start-menu__link {
+    color: #63b3ed;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.start-menu__link:hover {
+    text-decoration: underline;
+    color: #90cdf4;
+}
+
+.start-menu__link-truncate {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.start-menu__value-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.start-menu__copy-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.start-menu__copy-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.start-menu__copy-btn:active {
+    transform: scale(0.95);
+}
+
+.start-menu__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.start-menu__tag {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Footer Section */
+.start-menu__footer {
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.start-menu__shutdown-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+.start-menu__shutdown-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar specific for start menu */
+.start-menu__left-pane::-webkit-scrollbar {
+    width: 6px;
+}
+
+.start-menu__left-pane::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+}
+
+.start-menu__right-pane::-webkit-scrollbar {
+    width: 6px;
+}
+
+.start-menu__right-pane::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+@media (max-width: 500px) {
+    .start-menu {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .start-menu__content {
+        flex-direction: column;
+        height: auto;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .start-menu__left-pane,
+    .start-menu__right-pane {
+        overflow: visible;
+    }
+}

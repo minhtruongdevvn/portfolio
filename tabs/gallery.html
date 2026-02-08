@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust Gallery</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+        :root {
+            /* Theme: "Wanderlust" - Paper, Polaroids, Handwritten */
+            --bg-color: #f3f4f6;
+            --paper-color: #ffffff;
+            --text-primary: #1f2937;
+            --polaroid-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --tape-color: rgba(255, 255, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            /* Subtle paper texture pattern could go here */
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            animation: fadeDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 4rem;
+            transform: rotate(-2deg);
+            color: #111827;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Main Gallery Grid --- */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* --- Folder Stack (Polaroid Style) --- */
+        .folder-stack {
+            position: relative;
+            width: 280px;
+            height: 320px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .folder-stack:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        /* The photos in the stack */
+        .polaroid {
+            position: absolute;
+            background: white;
+            padding: 1rem 1rem 3rem 1rem;
+            box-shadow: var(--polaroid-shadow);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            top: 0;
+            left: 0;
+            border: 1px solid #e5e5e5;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #f3f4f6;
+            filter: sepia(0.2) contrast(1.1);
+        }
+
+        /* Stack Effect */
+        .folder-stack .polaroid:nth-child(1) {
+            transform: rotate(-5deg);
+            z-index: 1;
+        }
+
+        .folder-stack .polaroid:nth-child(2) {
+            transform: rotate(3deg);
+            z-index: 2;
+        }
+
+        .folder-stack .polaroid:nth-child(3) {
+            transform: rotate(-2deg);
+            z-index: 3;
+        }
+
+        /* Hover Spread Effect */
+        .folder-stack:hover .polaroid:nth-child(1) {
+            transform: rotate(-15deg) translate(-20px, 10px);
+        }
+
+        .folder-stack:hover .polaroid:nth-child(2) {
+            transform: rotate(10deg) translate(20px, 5px);
+        }
+
+        .folder-stack:hover .polaroid:nth-child(3) {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Label on the top polaroid */
+        .stack-label {
+            position: absolute;
+            bottom: 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #374151;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Details Overlay on Hover */
+        .details-overlay {
+            position: absolute;
+            bottom: -70px;
+            /* Increased distance */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .folder-stack:hover .details-overlay {
+            opacity: 1;
+            bottom: -60px;
+            /* Increased distance on hover too */
+        }
+
+        /* --- Modal (Full Gallery) --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: 2px solid white;
+            color: white;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .modal-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+            width: 100%;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        /* Responsive Columns */
+        @media (max-width: 900px) {
+            .modal-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .modal-grid {
+                column-count: 1;
+            }
+        }
+
+        /* Modal Scrollbar */
+        .modal-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-grid::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        /* Inner Photo Card */
+        .photo-card {
+            background: white;
+            padding: 0.75rem 0.75rem 2.5rem 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: rotate(var(--rot));
+            transition: transform 0.2s;
+            animation: popIn 0.4s ease-out backwards;
+            opacity: 0;
+
+            /* Masonry Fixes */
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.02) rotate(0deg) !important;
+            z-index: 10;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            /* Removed aspect-ratio so images render freely */
+            display: block;
+            background: #f0f0f0;
+        }
+
+        /* Animations */
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Memories</h1>
+        <p>A collection of moments frozen in time. Click a stack to explore.</p>
+    </header>
+
+    <div class="gallery-container" id="galleryContainer">
+        <!-- Rendered by JS -->
+    </div>
+
+    <!-- Modal for Gallery View -->
+    <div id="galleryModal" class="modal">
+        <div class="modal-header">
+            <h2 id="modalTitle" class="modal-title">Gallery</h2>
+            <button class="close-btn" onclick="closeGallery()">&times;</button>
+        </div>
+        <div id="modalGrid" class="modal-grid">
+            <!-- Images injected via JS -->
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const BASE_URL = '../pics_optimized'; // Change this to your S3 URL (e.g. 'https://my-bucket.s3.amazonaws.com')
+
+        const galleries = [
+            { title: 'Adelaide', folder: 'adelaide', count: 7 },
+            { title: 'Glenelg Night', folder: 'gleneg-night', count: 7 },
+            { title: 'Semaphore Beach', folder: 'semaphore', count: 8 }
+        ];
+
+        // --- RENDER STACKS ---
+        const galleryContainer = document.getElementById('galleryContainer');
+
+        function renderStacks() {
+            galleries.forEach(gallery => {
+                const stack = document.createElement('div');
+                stack.className = 'folder-stack';
+                stack.onclick = () => openGallery(gallery.title, gallery.folder, gallery.count);
+
+                // Background Polaroids (1 & 2)
+                for (let i = 1; i <= 2; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'polaroid';
+                    div.innerHTML = `<img src="${BASE_URL}/${gallery.folder}/${gallery.folder}-${i}.webp" alt="${gallery.title} ${i}"><div class="stack-label"></div>`;
+                    stack.appendChild(div);
+                }
+
+                // Top Polaroid (3)
+                const topDiv = document.createElement('div');
+                topDiv.className = 'polaroid';
+                topDiv.innerHTML = `
+                    <img src="${BASE_URL}/${gallery.folder}/${gallery.folder}-3.webp" alt="${gallery.title} Top">
+                    <div class="stack-label">${gallery.title}</div>
+                `;
+                stack.appendChild(topDiv);
+
+                // Overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'details-overlay';
+                overlay.innerText = `${gallery.count} Photos`;
+                stack.appendChild(overlay);
+
+                galleryContainer.appendChild(stack);
+            });
+        }
+
+        // --- MODAL LOGIC ---
+        const modal = document.getElementById('galleryModal');
+        const modalGrid = document.getElementById('modalGrid');
+        const modalTitle = document.getElementById('modalTitle');
+
+        function openGallery(title, folder, count) {
+            modalTitle.innerText = title;
+            modalGrid.innerHTML = '';
+
+            // Generate images
+            for (let i = 1; i <= count; i++) {
+                const rotation = (Math.random() * 6 - 3).toFixed(1); // Random rotate -3deg to 3deg
+
+                const card = document.createElement('div');
+                card.className = 'photo-card';
+                card.style.setProperty('--rot', rotation + 'deg');
+                card.style.animationDelay = (i * 0.05) + 's';
+
+                // Add staggered fade-in via inline style for safety
+                card.style.opacity = '1';
+
+                const img = document.createElement('img');
+                // Use BASE_URL here
+                img.dataset.src = `${BASE_URL}/${folder}/${folder}-${i}.webp`;
+                img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; // Placeholder
+                img.className = 'lazy';
+                img.loading = "lazy";
+
+                card.appendChild(img);
+                modalGrid.appendChild(card);
+            }
+
+            modal.classList.add('active');
+
+            // Initialize Intersection Observer for lazy loading in modal
+            initLazyLoad();
+        }
+
+        function closeGallery() {
+            modal.classList.remove('active');
+        }
+
+        function initLazyLoad() {
+            const lazyImages = document.querySelectorAll('img.lazy');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => observer.observe(img));
+        }
+
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeGallery();
+        });
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeGallery();
+        });
+
+        // Initialize
+        renderStacks();
+    </script>
+</body>
+
+</html>

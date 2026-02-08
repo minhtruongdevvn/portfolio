@@ -1,0 +1,50 @@
+/**
+ * Desktop Component Styles
+ * Main desktop container
+ */
+
+.desktop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: var(--win7-taskbar-height);
+  background: var(--desktop-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  z-index: var(--z-desktop);
+}
+
+/* Desktop with custom wallpaper */
+.desktop--with-wallpaper {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Desktop Credit/Watermark */
+.desktop-credit {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #FFFFFF;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+}
+
+.desktop-credit__title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.desktop-credit__author {
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.9;
+}

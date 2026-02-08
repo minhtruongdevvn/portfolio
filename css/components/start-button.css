@@ -1,0 +1,95 @@
+/**
+ * Start Button Component Styles
+ * Windows 7 start button
+ */
+
+.start-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 100%;
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0.1) 100%);
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  position: relative;
+}
+
+.start-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.start-button:hover::before {
+  opacity: 1;
+}
+
+.start-button:hover {
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(0, 0, 0, 0.05) 100%);
+}
+
+.start-button:active {
+  background: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(255, 255, 255, 0.05) 100%);
+}
+
+.start-button__icon {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Windows logo placeholder if no icon */
+.start-button__placeholder {
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #3C89D2 0%, #2A5A8A 100%);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Tooltip */
+.start-button__tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: calc(var(--z-taskbar) + 1);
+}
+
+.start-button:hover .start-button__tooltip {
+  opacity: 1;
+}

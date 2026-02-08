@@ -1,0 +1,159 @@
+/**
+ * System Tray Component Styles
+ * Clock and system icons
+ */
+
+.system-tray {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 12px;
+  padding: 0 0 0 12px;
+  background: rgba(0, 0, 0, 0.15);
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.system-tray__icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 12px;
+}
+
+.system-tray__icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background var(--transition-fast);
+}
+
+.system-tray__icon-wrapper:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.system-tray__icon-wrapper:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.system-tray__icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.95;
+  transition: all var(--transition-fast);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+}
+
+.system-tray__icon-wrapper:hover .system-tray__icon {
+  opacity: 1;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7)) brightness(1.1);
+  transform: scale(1.08);
+}
+
+.system-tray__icon-wrapper:active .system-tray__icon {
+  transform: scale(0.95);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* System tray icon tooltip */
+.system-tray__icon-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10001;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.system-tray__icon-wrapper:hover .system-tray__icon-tooltip {
+  opacity: 1;
+}
+
+/* Placeholder icon styling */
+.system-tray__icon-placeholder {
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  opacity: 0.9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.system-tray__icon-placeholder:hover {
+  background: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.system-tray__clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  border-radius: 2px;
+  min-width: 60px;
+}
+
+.system-tray__clock:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.system-tray__time {
+  font-size: 12px;
+  color: #FFFFFF;
+  font-weight: 400;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.system-tray__date {
+  font-size: 10px;
+  color: #FFFFFF;
+  font-weight: 400;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.system-tray__show-desktop {
+  width: 10px;
+  height: 100%;
+  margin-left: 8px;
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: linear-gradient(to right,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%);
+}
+
+.system-tray__show-desktop:hover {
+  background: linear-gradient(to right,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 100%);
+}
+
+.system-tray__show-desktop:active {
+  background: linear-gradient(to right,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.05) 100%);
+}

@@ -1,0 +1,145 @@
+/**
+ * Window Component - Base window with Windows 7 styling
+ */
+
+.window {
+  position: fixed;
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  background: linear-gradient(to bottom, #f0f0f0 0%, #e5e5e5 100%);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px 8px 0 0;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* Title Bar */
+.window__title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: linear-gradient(
+    to bottom,
+    rgba(185, 209, 234, 0.9) 0%,
+    rgba(158, 190, 223, 0.9) 50%,
+    rgba(133, 173, 213, 0.9) 51%,
+    rgba(106, 150, 194, 0.9) 100%
+  );
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: default;
+  user-select: none;
+}
+
+.window__title-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.window__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.window__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Controls */
+.window__controls {
+  display: flex;
+  gap: 2px;
+}
+
+.window__control-btn {
+  width: 26px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #f5f5f5 0%, #e0e0e0 100%);
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+}
+
+.window__control-btn:hover {
+  background: linear-gradient(to bottom, #fefefe 0%, #f0f0f0 100%);
+}
+
+.window__control-btn:active {
+  background: linear-gradient(to bottom, #d0d0d0 0%, #e0e0e0 100%);
+}
+
+.window__control-btn--minimize {
+  color: #fff;
+  background: rgb(56, 171, 224);
+  border-color: rgba(6, 79, 151, 1);
+}
+
+.window__control-btn--minimize:hover {
+  background: rgb(7, 140, 201);
+}
+
+.window__control-btn--minimize:focus {
+  background: rgb(7, 107, 154);
+}
+
+.window__control-btn--close {
+  color: #fff;
+  background: linear-gradient(to bottom, #f77 0%, #e55 100%);
+  border-color: rgba(200, 0, 0, 0.3);
+}
+
+.window__control-btn--close:hover {
+  background: linear-gradient(to bottom, #f88 0%, #f66 100%);
+}
+
+.window__control-btn--close:active {
+  background: linear-gradient(to bottom, #d44 0%, #e55 100%);
+}
+
+/* Content Area */
+.window__content {
+  flex: 1;
+  overflow: auto;
+  background: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile Responsive */
+@media (max-width: 700px) {
+  .window {
+    width: 100% !important;
+    height: calc(100% - 40px) !important;
+    left: 0 !important;
+    top: 0 !important;
+    border-radius: 0;
+  }
+
+  .window__title-bar {
+    padding: 12px;
+  }
+
+  .window__title {
+    font-size: 14px;
+  }
+
+  .window__control-btn {
+    width: 32px;
+    height: 28px;
+    font-size: 20px;
+  }
+}

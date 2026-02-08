@@ -1,0 +1,101 @@
+/**
+ * Taskbar App Component Styles
+ * Individual app icons in the taskbar
+ */
+
+.taskbar-app {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  max-width: 180px;
+  height: 32px;
+  padding: 0 8px;
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(0, 0, 0, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.taskbar-app:hover {
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0.05) 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.taskbar-app:active {
+  background: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.05) 100%);
+}
+
+.taskbar-app__icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  object-fit: contain;
+}
+
+.taskbar-app__label {
+  font-size: 12px;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Running indicator */
+.taskbar-app--running::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(60, 137, 210, 0.8) 20%,
+    rgba(60, 137, 210, 1) 50%,
+    rgba(60, 137, 210, 0.8) 80%,
+    transparent 100%);
+  border-radius: 2px 2px 0 0;
+}
+
+/* Active state */
+.taskbar-app--active {
+  background: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Tooltip */
+.taskbar-app__tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: calc(var(--z-taskbar) + 1);
+}
+
+.taskbar-app:hover .taskbar-app__tooltip {
+  opacity: 1;
+}

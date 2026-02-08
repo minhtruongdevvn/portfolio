@@ -1,0 +1,145 @@
+/**
+ * Taskbar Component Styles
+ * Windows 7 taskbar with glass effect
+ */
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--win7-taskbar-height);
+  background: var(--win7-glass-bg);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--win7-glass-border);
+  box-shadow: var(--shadow-taskbar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  z-index: var(--z-taskbar);
+}
+
+.taskbar__start-section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.taskbar__apps-section {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  padding: 0 4px;
+  gap: 4px;
+}
+
+.taskbar__system-tray {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+}
+
+/* Mobile apps dropdown button (hidden on desktop) */
+.taskbar__mobile-apps-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(0, 0, 0, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all var(--transition-fast);
+}
+
+.taskbar__mobile-apps-button:hover {
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0.05) 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.taskbar__mobile-apps-button--active {
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(0, 0, 0, 0.05) 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.taskbar__mobile-apps-text {
+  font-size: 11px;
+}
+
+.taskbar__mobile-apps-count {
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+.taskbar__mobile-apps-icon {
+  font-size: 10px;
+  transition: transform var(--transition-fast);
+}
+
+/* Mobile apps dropdown menu (hidden by default) */
+.taskbar__apps-dropdown {
+  position: fixed;
+  bottom: var(--win7-taskbar-height);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px 4px 0 0;
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: calc(var(--z-taskbar) + 1);
+  min-width: 200px;
+  max-width: 90vw;
+}
+
+.taskbar__apps-dropdown--open {
+  display: flex;
+}
+
+.taskbar__apps-dropdown .taskbar-app {
+  width: 100%;
+  min-width: 180px;
+  max-width: 100%;
+  justify-content: flex-start;
+}
+
+/* Dropdown scrollbar styling */
+.taskbar__apps-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.taskbar__apps-dropdown::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.taskbar__apps-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.taskbar__apps-dropdown::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Application - Leader Institute</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap');
+
+        :root {
+            /* Theme: "Academic Prestige" - Deep Navy, Gold, Clean White */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --card-border: #334155;
+            /* Slate 700 */
+
+            --primary: #fbbf24;
+            /* Amber 400 (Gold) */
+            --primary-dim: rgba(251, 191, 36, 0.1);
+
+            --accent: #38bdf8;
+            /* Sky 400 */
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* --- Components --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--text-primary);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            /* Gold Gradient on Text */
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        p {
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: #334155;
+            color: #e2e8f0;
+            margin-right: 0.5rem;
+        }
+
+        .badge.primary {
+            background: var(--primary-dim);
+            color: var(--primary);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        /* --- Tech Stack Grid --- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--card-border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .tech-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- Security Vis --- */
+        .security-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0f172a;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px dashed var(--card-border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .sec-node {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .sec-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sec-arrow {
+            color: var(--card-border);
+            font-size: 1.5rem;
+        }
+
+        /* --- Feature Highlights --- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .phone-mockup {
+            background: #000;
+            border-radius: 24px;
+            padding: 1rem;
+            border: 4px solid #334155;
+            aspect-ratio: 9/16;
+            width: 200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wallet-pass {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 2rem;
+            color: white;
+            position: relative;
+        }
+
+        .wallet-pass::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .security-diagram {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .sec-arrow {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+
+            .feature-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        /* Animation */
+        .animate-in {
+            animation: fadeUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="animate-in delay-1">
+            <div
+                style="display:flex; justify-content: space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+                <div>
+                    <h1>Alumni Application</h1>
+                    <p style="font-size: 1.1rem; max-width: 600px;">
+                        A Next.js 15 powered platform for the Leader Institute, featuring serverless scale,
+                        military-grade security, and seamless event management.
+                    </p>
+                    <div style="margin-top: 1rem;">
+                        <span class="badge primary">Next.js 15</span>
+                        <span class="badge primary">React 19</span>
+                        <span class="badge primary">TypeScript</span>
+                        <span class="badge">Live Production</span>
+                    </div>
+                </div>
+                <!-- Institute Logo Placeholder -->
+                <div
+                    style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #0f172a; font-size: 2rem; font-family: 'Playfair Display';">
+                    LI
+                </div>
+            </div>
+        </header>
+
+        <!-- Core Modules -->
+        <section class="card animate-in delay-3">
+            <h2>💎 Core Modules</h2>
+            <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+
+                <!-- Login -->
+                <div class="tech-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">1. Identity & Access
+                    </h3>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li style="margin-bottom: 0.5rem;">• <strong>SSO Logging:</strong> Seamless integration with
+                            Google & Microsoft accounts.</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Tourist Mode:</strong> Limited access for external
+                            visitors.</li>
+                        <li>• <strong>MFA Protection:</strong> OTP flow for sensitive actions.</li>
+                    </ul>
+                </div>
+
+                <!-- Home -->
+                <div class="tech-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">2. Home Dashboard</h3>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li style="margin-bottom: 0.5rem;">• <strong>Smart Nav:</strong> Quick access to Profile,
+                            Settings, & Admin.</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Quick Search:</strong> Instant directory lookup
+                            from the hero area.</li>
+                        <li>• <strong>Action Cards:</strong> "Upcoming Events" & "My Network" widgets.</li>
+                    </ul>
+                </div>
+
+                <!-- Alumni Directory -->
+                <div class="tech-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">3. Alumni Directory
+                    </h3>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li style="margin-bottom: 0.5rem;">• <strong>Advanced Filtering:</strong> Industry, Class Year,
+                            State (AU).</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Mentorship:</strong> "Can Support" / "Needs
+                            Support" tags.</li>
+                        <li>• <strong>Profile Card:</strong> Career info, Interests, & Support preferences.</li>
+                    </ul>
+                </div>
+
+                <!-- Profile -->
+                <div class="tech-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">4. Personal Profile
+                    </h3>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li style="margin-bottom: 0.5rem;">• <strong>Easy Edit:</strong> Inline editing & dropdown
+                            selections.</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Media:</strong> Profile picture upload &
+                            management.</li>
+                        <li>• <strong>Data Fields:</strong> Personal, Career, & Interest data.</li>
+                    </ul>
+                </div>
+
+                <!-- Privacy -->
+                <div class="tech-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">5. Privacy Control
+                    </h3>
+                    <div style="font-size: 0.85rem; margin-bottom: 0.5rem; color: #94a3b8;">
+                        4 Sections: Password, Personal, Professional, Profile
+                    </div>
+                    <div style="background: rgba(0,0,0,0.3); padding:0.5rem; border-radius:4px; font-size:0.8rem;">
+                        <span style="color:var(--success);">● Public</span>
+                        <span style="color:var(--primary); margin:0 0.5rem;">● Alumni Only</span>
+                        <span style="color:#ef4444;">● Hidden</span>
+                    </div>
+                </div>
+
+                <!-- Admin & Events -->
+                <div class="tech-card">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">6. Admin & Events</h3>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li style="margin-bottom: 0.5rem;">• <strong>Verification:</strong> Invite-only alumni
+                            onboarding.</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Event Publisher:</strong> Create events (Date, Loc,
+                            Cost).</li>
+                        <li>• <strong>Ticketing:</strong> Apple/Google Wallet integration.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technical Architecture -->
+        <section class="card animate-in delay-2">
+            <h2>🚀 Serverless-First Architecture</h2>
+            <div
+                style="margin-bottom: 1.5rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #60a5fa; border-radius: 4px;">
+                <strong style="color: #60a5fa;">Effectiveness at Scale:</strong>
+                <span style="font-size: 0.95rem; color: var(--text-secondary);">
+                    Engineered to support <strong> less than 5,000 active users</strong>
+                </span>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <span class="tech-icon">⚡</span>
+                    <strong>Next.js App Router</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        React Server Components for zero-bundle-size data fetching. Logic executes on the edge.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">🐘</span>
+                    <strong>Neon (PostgreSQL)</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Serverless Postgres with connection pooling via Prisma to handle high-concurrency bursts.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">☁️</span>
+                    <strong>AWS S3</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Secure object storage for alumni profiles and assets, integrated via AWS SDK v3.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">🎨</span>
+                    <strong>Tailwind v4</strong>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Zero-runtime CSS with modern fluid utilities for responsive design.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security -->
+        <section class="card animate-in delay-3">
+            <h2>🔐 Defense-in-Depth Security</h2>
+            <p>
+                Strict adherence to the <strong>Australian Privacy Act</strong> with a custom "Field-Level Privacy
+                Engine".
+            </p>
+
+            <div class="security-diagram">
+                <div class="sec-node">
+                    <div class="sec-icon">🛑</div>
+                    <strong>WAF & Rate Limit</strong>
+                    <span
+                        style="display:block; font-size:0.8rem; color:var(--text-secondary); margin-top:0.25rem;">Global
+                        Edge</span>
+                </div>
+                <div class="sec-arrow">➜</div>
+                <div class="sec-node">
+                    <div class="sec-icon">🔑</div>
+                    <strong>NextAuth MFA</strong>
+                    <span style="display:block; font-size:0.8rem; color:var(--text-secondary); margin-top:0.25rem;">SSO
+                        + OTP</span>
+                </div>
+                <div class="sec-arrow">➜</div>
+                <div class="sec-node">
+                    <div class="sec-icon">🛡️</div>
+                    <strong>RBAC Middleware</strong>
+                    <span
+                        style="display:block; font-size:0.8rem; color:var(--text-secondary); margin-top:0.25rem;">Visitor
+                        / Alumni / Admin</span>
+                </div>
+                <div class="sec-arrow">➜</div>
+                <div class="sec-node">
+                    <div class="sec-icon">👁️</div>
+                    <strong>Privacy Engine</strong>
+                    <span
+                        style="display:block; font-size:0.8rem; color:var(--text-secondary); margin-top:0.25rem;">Field
+                        Redaction</span>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Compliance -->
+        <footer
+            style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; padding-top: 1rem; border-top: 1px solid var(--card-border);">
+            <p style="margin-bottom: 0.5rem;">NDB Scheme Compliant • Privacy Act 1988</p>
+        </footer>
+
+    </div>
+</body>
+
+</html>

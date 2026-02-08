@@ -1,0 +1,302 @@
+/**
+ * Responsive CSS
+ * Mobile and tablet optimizations
+ */
+
+/* Tablet devices (portrait) */
+@media screen and (max-width: 1024px) {
+  :root {
+    --icon-size: 56px;
+    --icon-label-font: 12px;
+    --win7-taskbar-height: 50px;
+  }
+
+  .desktop-icon {
+    width: 90px;
+  }
+
+  .taskbar-app {
+    min-width: 140px;
+    max-width: 140px;
+  }
+}
+
+/* Mobile devices (landscape) */
+@media screen and (max-width: 768px) {
+  :root {
+    --icon-size: 64px;
+    --icon-label-font: 13px;
+    --win7-taskbar-height: 60px;
+  }
+
+  .desktop {
+    touch-action: none;
+  }
+
+  .desktop-icon {
+    width: 100px;
+    padding: 8px;
+  }
+
+  /* Taskbar adjustments */
+  .taskbar__apps-section {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .taskbar__apps-section::-webkit-scrollbar {
+    display: none;
+  }
+
+  .taskbar-app {
+    min-width: 120px;
+    max-width: 120px;
+    font-size: 11px;
+  }
+
+  .system-tray__clock {
+    min-width: 70px;
+  }
+
+  .system-tray__time {
+    font-size: 13px;
+  }
+
+  .system-tray__date {
+    font-size: 11px;
+  }
+
+  /* Hide show desktop button on mobile */
+  .system-tray__show-desktop {
+    display: none;
+  }
+}
+
+/* Mobile devices (portrait) */
+@media screen and (max-width: 700px) {
+  :root {
+    --icon-size: 56px;
+    --icon-label-font: 11px;
+    --win7-taskbar-height: 56px;
+  }
+
+  .desktop-icon {
+    width: 80px;
+    padding: 6px;
+  }
+
+  /* Single column icon layout */
+  .desktop {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 80px);
+    gap: 8px;
+    padding: 10px;
+    align-content: start;
+  }
+
+  .desktop-icon {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  /* Disable selection box on mobile */
+  .selection-box {
+    display: none !important;
+  }
+
+
+
+  /* Taskbar mobile layout */
+  .taskbar {
+    padding: 0;
+  }
+
+  .start-button {
+    width: 50px;
+  }
+
+  .taskbar__apps-section {
+    padding: 0 2px;
+    gap: 2px;
+    justify-content: center;
+  }
+
+  /* Hide individual taskbar apps on mobile */
+  .taskbar__apps-section .taskbar-app {
+    display: none;
+  }
+
+  /* Show mobile dropdown button */
+  .taskbar__mobile-apps-button {
+    display: flex;
+  }
+
+  .taskbar-app {
+    min-width: 100px;
+    max-width: 100px;
+    height: 40px;
+    font-size: 10px;
+  }
+
+  .taskbar-app__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* System tray mobile */
+  .system-tray {
+    gap: 6px;
+    padding: 0 0 0 6px;
+  }
+
+  .system-tray__icons {
+    gap: 4px;
+    padding-right: 6px;
+  }
+
+  .system-tray__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .system-tray__icon-wrapper {
+    padding: 3px;
+  }
+
+  .system-tray__clock {
+    min-width: 60px;
+    padding: 0 4px;
+  }
+
+  .system-tray__time {
+    font-size: 11px;
+  }
+
+  .system-tray__date {
+    font-size: 9px;
+  }
+
+  /* Dropdown menu mobile */
+  .dropdown-menu {
+    min-width: 180px;
+    max-width: 90vw;
+  }
+
+  .dropdown-menu__item {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  /* Tooltip adjustments */
+  .tooltip {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+/* Extra small mobile devices */
+@media screen and (max-width: 360px) {
+  :root {
+    --icon-size: 48px;
+    --icon-label-font: 10px;
+    --win7-taskbar-height: 52px;
+  }
+
+  .desktop-icon {
+    width: 70px;
+  }
+
+  .desktop {
+    grid-template-columns: repeat(auto-fill, 70px);
+  }
+
+  .taskbar-app {
+    min-width: 80px;
+    max-width: 80px;
+  }
+
+  .system-tray__clock {
+    min-width: 50px;
+  }
+
+  .system-tray__time {
+    font-size: 10px;
+  }
+
+  .system-tray__date {
+    font-size: 8px;
+  }
+}
+
+/* Landscape mobile optimization */
+@media screen and (max-height: 700px) and (orientation: landscape) {
+  :root {
+    --win7-taskbar-height: 48px;
+  }
+
+  .desktop-icon {
+    width: 70px;
+  }
+
+  .desktop-icon__label {
+    font-size: 10px;
+  }
+
+  .taskbar-app {
+    height: 36px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+
+  /* Increase touch targets */
+  .desktop-icon {
+    padding: 10px;
+  }
+
+  .system-tray__icon-wrapper {
+    padding: 6px;
+  }
+
+  .taskbar-app {
+    padding: 0 10px;
+  }
+
+  /* Remove hover effects on touch devices */
+  .desktop-icon:hover {
+    background-color: transparent;
+    border: none;
+  }
+
+  .desktop-icon--selected {
+    background-color: var(--win7-selection-blue);
+    border: 2px solid var(--win7-blue);
+  }
+
+  /* Disable hover animations */
+  .system-tray__icon:hover {
+    animation: none;
+  }
+
+  /* Hide tooltips on touch devices */
+  .system-tray__icon-tooltip,
+  .taskbar-app__tooltip,
+  .tooltip {
+    display: none !important;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+  .desktop-icon__image,
+  .system-tray__icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}

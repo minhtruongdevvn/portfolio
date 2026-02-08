@@ -1,0 +1,29 @@
+{
+  "name": "portfolio-desktop",
+  "version": "1.0.0",
+  "description": "Windows 7 style desktop portfolio",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "copy-assets": "cp -r assets dist/ && cp -r css dist/ && cp -r tabs dist/ && cp -r pics_optimized dist/ && cp index.html dist/ && cp rate-limit-error.html dist/",
+    "build:ts": "tsc",
+    "build": "npm run clean && npm run build:ts && npm run copy-assets",
+    "watch:ts": "tsc -w",
+    "watch:assets": "chokidar \"source/**/*\" \"css/**/*\" \"assets/**/*\" \"index.html\" -c \"npm run copy-assets\"",
+    "dev": "npm run build && concurrently -k \"npm run watch:ts\" \"npm run watch:assets\" \"live-server dist --port=8080\""
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.2.1",
+    "live-server": "^1.2.2",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "portfolio",
+    "desktop",
+    "windows7",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT"
+}

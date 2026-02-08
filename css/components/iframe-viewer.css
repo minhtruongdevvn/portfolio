@@ -1,0 +1,46 @@
+/**
+ * IframeViewer Component Styles
+ */
+
+.iframe-viewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.iframe-viewer__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+  flex: 1;
+}
+
+/* Loading State */
+.iframe-viewer__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Error State */
+.iframe-viewer__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #d44;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+}
+
+.iframe-viewer__error-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
