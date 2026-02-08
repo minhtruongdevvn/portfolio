@@ -8,6 +8,7 @@ import {
 import { WindowState } from "./state/WindowState.js";
 import { DesktopIcon } from "./components/DesktopIcon.js";
 import { Taskbar } from "./components/Taskbar.js";
+import { InstructionOverlay } from "./components/InstructionOverlay.js";
 import { DESKTOP_ICONS } from "./config/desktop-config.js";
 import { WALLPAPERS } from "./config/assets.js";
 import { notify } from "./managers/NotificationManager.js";
@@ -93,6 +94,9 @@ class DesktopApp {
 
     checkScreen();
     window.addEventListener("resize", checkScreen);
+
+    // Show landing instruction overlay
+    new InstructionOverlay().render();
   }
 
   /**

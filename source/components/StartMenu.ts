@@ -78,6 +78,8 @@ export class StartMenu {
       <p class="start-menu__bio">
         Interested in Cloud Engineering or Full-Stack Development where I can leverage both my software development and/or cloud/security expertise.
       </p>
+
+
     `;
 
     // Right Pane (Contact & Personal)
@@ -129,6 +131,24 @@ export class StartMenu {
           <span class="start-menu__tag">Cooking</span>
           <span class="start-menu__tag">Gym</span>
         </div>
+      </div>
+
+      <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="start-menu__section-title" style="color: rgba(255,255,255,0.9); font-size: 13px; margin-bottom: 8px; border-bottom: none;">System Usage</div>
+        <ul class="start-menu__features-list" style="margin: 0;">
+          <li class="start-menu__feature-item" style="color: rgba(255,255,255,0.8); font-size: 12px; margin-bottom: 4px;">
+            <span class="start-menu__feature-icon">ℹ️</span>
+            <span>Double-click to open</span>
+          </li>
+          <li class="start-menu__feature-item" style="color: rgba(255,255,255,0.8); font-size: 12px; margin-bottom: 4px;">
+            <span class="start-menu__feature-icon">✋</span>
+            <span>Drag & drop to move icons</span>
+          </li>
+          <li class="start-menu__feature-item" style="color: rgba(255,255,255,0.8); font-size: 12px; margin-bottom: 4px;">
+            <span class="start-menu__feature-icon">✨</span>
+            <span>Select multiple on desktop</span>
+          </li>
+        </ul>
       </div>
     `;
 
