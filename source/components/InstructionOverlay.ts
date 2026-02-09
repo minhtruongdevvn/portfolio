@@ -15,7 +15,7 @@ export class InstructionOverlay {
    */
   shouldShow(): boolean {
     // Show once per session
-    return true;
+    return !sessionStorage.getItem("instructionSeen");
   }
 
   /**
