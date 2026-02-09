@@ -321,19 +321,24 @@
             text-transform: uppercase;
         }
 
-        .method.get {
+        .method.unary {
             background: rgba(59, 130, 246, 0.2);
             color: #60a5fa;
         }
 
-        .method.post {
+        .method.stream {
+            background: rgba(168, 85, 247, 0.2);
+            color: #c084fc;
+        }
+
+        .method.server-stream {
             background: rgba(34, 197, 94, 0.2);
             color: #4ade80;
         }
 
-        .method.delete {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
+        .method.client-stream {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
         }
 
         .path {
@@ -738,76 +743,76 @@
 
         </section>
 
-        <!-- API Operations (Added from README version) -->
+        <!-- gRPC Operations -->
         <section class="card animate-in delay-4">
-            <h2>📚 API Operations</h2>
+            <h2>📚 gRPC Operations</h2>
             <div class="api-grid">
 
-                <!-- Store Operations -->
+                <!-- Store Service -->
                 <div class="endpoint">
                     <div class="endpoint-header">
-                        <span class="method get">GET</span>
-                        <span class="path">/stores</span>
+                        <span class="method server-stream">Server Stream</span>
+                        <span class="path">SearchStores</span>
                     </div>
-                    <p>Search by name/geo/promo.</p>
+                    <p>Stream search results by name/geo/promo.</p>
                 </div>
 
                 <div class="endpoint">
                     <div class="endpoint-header">
-                        <span class="method post">POST</span>
-                        <span class="path">/stores</span>
+                        <span class="method unary">Unary</span>
+                        <span class="path">UpsertStore</span>
                     </div>
-                    <p>Upsert store document.</p>
+                    <p>Create or update store document.</p>
                 </div>
 
                 <div class="endpoint">
                     <div class="endpoint-header">
-                        <span class="method post">POST</span>
-                        <span class="path">/stores/bulk</span>
+                        <span class="method client-stream">Client Stream</span>
+                        <span class="path">BulkUpsertStores</span>
                     </div>
-                    <p>Bulk upsert stores.</p>
+                    <p>Stream bulk store upserts for efficiency.</p>
                 </div>
 
                 <div class="endpoint">
                     <div class="endpoint-header">
-                        <span class="method delete">DELETE</span>
-                        <span class="path">/stores/:id</span>
+                        <span class="method unary">Unary</span>
+                        <span class="path">DeleteStore</span>
                     </div>
-                    <p>Remove store & children.</p>
+                    <p>Remove store & nested children.</p>
                 </div>
 
-                <!-- Food Operations -->
+                <!-- Food Service -->
                 <div class="endpoint">
                     <div class="endpoint-header">
-                        <span class="method post">POST</span>
-                        <span class="path">/foods/:sid</span>
+                        <span class="method unary">Unary</span>
+                        <span class="path">UpsertFood</span>
                     </div>
-                    <p>Upsert nested food item.</p>
-                </div>
-
-                <div class="endpoint">
-                    <div class="endpoint-header">
-                        <span class="method delete">DELETE</span>
-                        <span class="path">/foods/:sid/:fid</span>
-                    </div>
-                    <p>Remove nested food item.</p>
-                </div>
-
-                <!-- Promotion Operations -->
-                <div class="endpoint">
-                    <div class="endpoint-header">
-                        <span class="method post">POST</span>
-                        <span class="path">/promotions</span>
-                    </div>
-                    <p>Apply promo to area/stores.</p>
+                    <p>Create or update nested food item.</p>
                 </div>
 
                 <div class="endpoint">
                     <div class="endpoint-header">
-                        <span class="method delete">DELETE</span>
-                        <span class="path">/promotions/area</span>
+                        <span class="method unary">Unary</span>
+                        <span class="path">DeleteFood</span>
                     </div>
-                    <p>Clear area promotions.</p>
+                    <p>Remove nested food from store.</p>
+                </div>
+
+                <!-- Promotion Service -->
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method stream">BiDi Stream</span>
+                        <span class="path">ApplyPromotions</span>
+                    </div>
+                    <p>Bidirectional stream for real-time promo sync.</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method unary">Unary</span>
+                        <span class="path">ClearAreaPromotions</span>
+                    </div>
+                    <p>Clear promotions for specific area.</p>
                 </div>
 
             </div>
