@@ -4,89 +4,95 @@
  */
 
 .instruction-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 9000;
-    /* High z-index, but maybe below some critical alerts if any */
-    display: flex;
-    opacity: 0;
-    animation: instructionFadeIn 0.5s 0.5s forwards;
-    /* Delay slightly to let UI settle */
-    cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9000;
+  /* High z-index, but maybe below some critical alerts if any */
+  display: flex;
+  opacity: 0;
+  animation: instructionFadeIn 0.5s 0.5s forwards;
+  /* Delay slightly to let UI settle */
+  cursor: pointer;
 }
 
 .instruction-container {
-    position: absolute;
-    bottom: 60px;
-    /* Just above taskbar */
-    left: 60px;
-    /* Offset from corner */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    animation: bounce 2s infinite;
-}
-
-.instruction-text {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-    background: rgba(0, 0, 0, 0.3);
-    padding: 5px 15px;
-    border-radius: 8px;
-    backdrop-filter: blur(4px);
+  position: absolute;
+  bottom: 14px;
+  left: -4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .instruction-subtext {
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 15px;
-    opacity: 0.9;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-    margin-left: 5px;
+  width: 200px;
+  opacity: 0.9;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  margin-left: 25px;
+  margin-bottom: 20px;
+}
+
+.instruction-arrow-container {
+  margin-left: 30px;
+  transform: rotate(30deg);
 }
 
 .instruction-arrow {
-    width: 80px;
-    height: 80px;
-    color: white;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
-    margin-left: 20px;
-    transform: rotate(10deg);
+  width: 60px;
+  color: white;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+}
+
+.instruction-button {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  animation: buttonBounce 2s ease-in-out infinite;
+}
+
+.instruction-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  animation: none;
+}
+
+.instruction-button:active {
+  transform: translateY(0) scale(1);
 }
 
 @keyframes instructionFadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes bounce {
-
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        transform: translateY(0);
-    }
-
-    40% {
-        transform: translateY(-20px);
-    }
-
-    60% {
-        transform: translateY(-10px);
-    }
+@keyframes buttonBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
