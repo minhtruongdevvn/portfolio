@@ -48,3 +48,9 @@
   font-weight: 400;
   opacity: 0.9;
 }
+
+/* Allow clicking links in credit */
+.desktop-credit a {
+  pointer-events: auto;
+  cursor: pointer;
+}
