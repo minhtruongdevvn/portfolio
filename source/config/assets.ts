@@ -21,6 +21,8 @@ export const ICONS = {
   textEditor: SVG_DATA_URIS['text-editor'], // Added
   iframe: SVG_DATA_URIS['iframe'], // Added
   robot: SVG_DATA_URIS['robot'],
+  message: SVG_DATA_URIS['message'],
+  privacyPolicy: SVG_DATA_URIS['privacy-policy'],
 } as const;
 
 // Wallpaper paths

@@ -263,7 +263,16 @@ export class WindowState extends BaseState<WindowStateData> {
 
     let newActiveId = this._state.activeWindowId;
     if (newActiveId === windowId) {
-      newActiveId = null;
+      // Find another open window to activate
+      const nextEntry = [...newWindows.entries()].find(([id]) => id !== windowId);
+      if (nextEntry) {
+        const [nextId, nextWindow] = nextEntry;
+        nextWindow.show();
+        newActiveId = nextId;
+        this.emit("taskbar:setAppActive", { appId: nextId, active: true });
+      } else {
+        newActiveId = null;
+      }
     }
 
     this.setState({

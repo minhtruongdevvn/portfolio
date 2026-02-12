@@ -15,6 +15,7 @@ export class Taskbar {
   private startButton: StartButton | null;
   private startMenu: StartMenu | null;
   private taskbarApps: TaskbarApp[];
+  private mobileTaskbarApps: TaskbarApp[];
   private systemTray: SystemTray | null;
   private appsDropdown: HTMLElement | null;
   private isDropdownOpen: boolean;
@@ -27,6 +28,7 @@ export class Taskbar {
     this.startButton = null;
     this.startMenu = null;
     this.taskbarApps = [];
+    this.mobileTaskbarApps = [];
     this.systemTray = null;
     this.appsDropdown = null;
     this.isDropdownOpen = false;
@@ -44,9 +46,16 @@ export class Taskbar {
 
     this.eventBus.on<TaskbarEventData>('taskbar:setAppActive', (data) => {
       if (data.appId) {
+        // Update desktop app
         const app = this.getApp(data.appId);
         if (app && typeof data.active === 'boolean') {
           app.setActive(data.active);
+        }
+
+        // Update mobile app
+        const mobileApp = this.getMobileApp(data.appId);
+        if (mobileApp && typeof data.active === 'boolean') {
+          mobileApp.setActive(data.active);
         }
       }
     });
@@ -108,16 +117,18 @@ export class Taskbar {
 
     // Add taskbar apps
     TASKBAR_APPS.forEach((appConfig) => {
+      // Desktop App
       const app = new TaskbarApp(appConfig, this.eventBus);
       const appElement = app.render();
 
-      // Create a new app instance for dropdown (mobile)
+      // Mobile App (Dropdown)
       const mobileApp = new TaskbarApp(appConfig, this.eventBus);
       const dropdownApp = mobileApp.render();
       dropdownApp.addEventListener("click", () => {
         this.closeAppsDropdown();
       });
       this.appsDropdown!.appendChild(dropdownApp);
+      this.mobileTaskbarApps.push(mobileApp);
 
       // Add original to apps section (desktop)
       appsSection.appendChild(appElement);
@@ -192,18 +203,34 @@ export class Taskbar {
    * Add app to taskbar
    */
   addApp(appConfig: TaskbarAppConfig): void {
+    // 1. Add to Desktop Taskbar
     const app = new TaskbarApp(appConfig, this.eventBus);
     const appsSection = this.element!.querySelector(".taskbar__apps-section");
     if (appsSection) {
       appsSection.appendChild(app.render());
       this.taskbarApps.push(app);
     }
+
+    // 2. Add to Mobile Dropdown
+    if (this.appsDropdown) {
+      const mobileApp = new TaskbarApp(appConfig, this.eventBus);
+      const mobileAppElement = mobileApp.render();
+      mobileAppElement.addEventListener("click", () => {
+        this.closeAppsDropdown();
+      });
+      this.appsDropdown.appendChild(mobileAppElement);
+      this.mobileTaskbarApps.push(mobileApp);
+    }
+
+    // 3. Update Mobile Count
+    this.updateMobileAppsCount();
   }
 
   /**
    * Remove app from taskbar
    */
   removeApp(appId: string): void {
+    // 1. Remove from Desktop
     const appIndex = this.taskbarApps.findIndex((app) => app.id === appId);
     if (appIndex !== -1) {
       const app = this.taskbarApps[appIndex];
@@ -212,6 +239,34 @@ export class Taskbar {
       }
       this.taskbarApps.splice(appIndex, 1);
     }
+
+    // 2. Remove from Mobile
+    const mobileAppIndex = this.mobileTaskbarApps.findIndex((app) => app.id === appId);
+    if (mobileAppIndex !== -1) {
+      const app = this.mobileTaskbarApps[mobileAppIndex];
+      if (app && app.element && app.element.parentNode) {
+        app.element.parentNode.removeChild(app.element);
+      }
+      this.mobileTaskbarApps.splice(mobileAppIndex, 1);
+    }
+
+    // 3. Update Mobile Count
+    this.updateMobileAppsCount();
+  }
+
+  /**
+   * Update the counter on the mobile apps button
+   */
+  private updateMobileAppsCount(): void {
+    if (this.mobileDropdownBtn) {
+      const countSpan = this.mobileDropdownBtn.querySelector(".taskbar__mobile-apps-count");
+      if (countSpan) {
+        // Count represents number of active/open apps, or just total apps in the list?
+        // Based on original code `TASKBAR_APPS.length`, it was total apps.
+        // Assuming we want to show total apps in the bar.
+        countSpan.textContent = this.taskbarApps.length.toString();
+      }
+    }
   }
 
   /**
@@ -219,6 +274,13 @@ export class Taskbar {
    */
   getApp(appId: string): TaskbarApp | undefined {
     return this.taskbarApps.find((app) => app.id === appId);
+  }
+
+  /**
+   * Get mobile app by ID
+   */
+  getMobileApp(appId: string): TaskbarApp | undefined {
+    return this.mobileTaskbarApps.find((app) => app.id === appId);
   }
 
   /**

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Message Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.4);
+      --bg-dark: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: rgba(99, 102, 241, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* improved scrolling behavior */
+      justify-content: flex-start;
+      padding: 40px 24px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Center container vertically if there is space */
+    .container {
+      margin: auto;
+    }
+
+    /* Animated background glow */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse,
+          rgba(37, 99, 235, 0.15) 0%,
+          transparent 70%);
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .icon-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg,
+          rgba(37, 99, 235, 0.2),
+          rgba(6, 182, 212, 0.15));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+    }
+
+    .icon-wrapper svg {
+      width: 38px;
+      height: 38px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e2e8f0, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .status-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: #6ee7b7;
+      margin-bottom: 36px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.85);
+      }
+    }
+
+    /* Tawk.to widget will appear as a chat button in bottom-right.
+         This card is the landing content shown in the window. */
+    .chat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      margin-bottom: 24px;
+    }
+
+    .chat-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .open-chat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary), #0891b2);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: "Inter", sans-serif;
+      cursor: pointer;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+    }
+
+    .open-chat-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.5);
+    }
+
+    .open-chat-btn:active {
+      transform: translateY(0);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-bottom: 20px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .alt-contacts {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .alt-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.83rem;
+      text-decoration: none;
+      transition:
+        color 0.15s,
+        border-color 0.15s;
+    }
+
+    .alt-link:hover {
+      color: var(--text-main);
+      border-color: rgba(99, 130, 246, 0.4);
+    }
+
+    /* Loader for iframe */
+    .loader-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--card-bg);
+      z-index: 10;
+      transition: opacity 0.5s ease-out, visibility 0.5s;
+    }
+
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="icon-wrapper">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#06b6d4" />
+          </linearGradient>
+        </defs>
+        <rect x="4" y="8" width="44" height="34" rx="7" fill="url(#g1)" opacity="0.85" />
+        <path d="M4 36 L4 44 L14 38" fill="#1d4ed8" />
+        <rect x="18" y="22" width="40" height="30" rx="7" fill="url(#g1)" />
+        <path d="M58 48 L58 56 L47 50" fill="#1e40af" />
+        <circle cx="28" cy="37" r="2.2" fill="#bfdbfe" />
+        <circle cx="36" cy="37" r="2.2" fill="#bfdbfe" />
+        <circle cx="44" cy="37" r="2.2" fill="#bfdbfe" />
+        <rect x="8" y="17" width="14" height="2.5" rx="1.2" fill="#bfdbfe" opacity="0.8" />
+        <rect x="8" y="22" width="20" height="2.5" rx="1.2" fill="#bfdbfe" opacity="0.6" />
+      </svg>
+    </div>
+
+    <h1>Message Me</h1>
+    <p class="subtitle">
+      Have a question, project idea, or just want to say hi?<br />
+      I typically reply within a few hours.
+    </p>
+
+
+
+    <div class="chat-card" style="padding: 0; height: 600px; overflow: hidden; position: relative;">
+      <div class="loader-container" id="chat-loader">
+        <div class="loader"></div>
+      </div>
+      <iframe src="https://tawk.to/chat/698d17580867ad1c3917fbb6/1jh7i6dfu"
+        style="width: 100%; height: calc(100% + 60px); border: none; margin-top: -60px;" title="Chat"
+        onload="document.getElementById('chat-loader').classList.add('hidden')"></iframe>
+    </div>
+
+
+
+
+
+    <!--
+      TAWK.TO CHAT EMBEDDED ABOVE
+    -->
+</body>
+
+</html>

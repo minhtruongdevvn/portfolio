@@ -97,6 +97,22 @@ export const DESKTOP_ICONS: IconConfig[] = [
       { id: "properties", label: "Properties", action: "properties" },
     ],
   },
+  {
+    id: "privacy-policy",
+    name: "Privacy Policy",
+    icon: ICONS.privacyPolicy,
+    column: "left",
+    position: { y: 320 },
+    contentType: "iframe",
+    contentData: {
+      url: `${BASE_URL}tabs/privacy-policy.html`,
+    },
+    menuItems: [
+      { id: "open", label: "Open", action: "open" },
+      { type: "separator" },
+      { id: "properties", label: "Properties", action: "properties" },
+    ],
+  },
 
   // Middle icons
   {
@@ -236,6 +252,22 @@ export const DESKTOP_ICONS: IconConfig[] = [
     contentType: "text",
     contentData: {
       text: "I'm about to master the technology of Artificial Intelligence. Stay tuned for amazing AI-powered applications!",
+    },
+    menuItems: [
+      { id: "open", label: "Open", action: "open" },
+      { type: "separator" },
+      { id: "properties", label: "Properties", action: "properties" },
+    ],
+  },
+  {
+    id: "message-me",
+    name: "Message Me",
+    icon: ICONS.message,
+    column: "right",
+    position: { y: 420 },
+    contentType: "iframe",
+    contentData: {
+      url: `${BASE_URL}tabs/message.html`,
     },
     menuItems: [
       { id: "open", label: "Open", action: "open" },

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: rgba(99, 102, 241, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            padding: 40px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Animated background glow similar to other pages */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse,
+                    rgba(37, 99, 235, 0.15) 0%,
+                    transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #e2e8f0, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <span class="date">Last updated: February 12, 2026</span>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Thank you for visiting my portfolio. I respect your privacy and am committed to protecting it. This policy
+            explains the limited ways in which this website interacts with your data.
+        </p>
+
+        <h2>2. Information Collection</h2>
+        <p>
+            This is a static portfolio website designed to showcase my professional work. I do not actively collect,
+            store, or process personal data from visitors, with the exception of voluntarily provided communication.
+        </p>
+
+        <h2>3. Third-Party Services</h2>
+        <p>
+            This website integrates <strong>Tawk.to</strong>, a third-party live chat service, to allow real-time
+            communication.
+        </p>
+        <ul>
+            <li>
+                When you use the chat widget, Tawk.to may collect information such as your IP address, browser type, and
+                operating system to facilitate the chat session.
+            </li>
+            <li>
+                If you voluntarily provide your name or email address during a chat, that information is processed by
+                Tawk.to and made available to me solely for the purpose of replying to your inquiry.
+            </li>
+        </ul>
+        <p>
+            Please refer to <a href="https://www.tawk.to/privacy-policy/" target="_blank"
+                style="color: var(--primary);">Tawk.to's Privacy Policy</a> for more details on how they handle data.
+        </p>
+
+        <h2>4. Cookies</h2>
+        <p>
+            This website itself does not use cookies for tracking or advertising. However, the Tawk.to chat widget may
+            set necessary cookies to maintain your chat session and preferences.
+        </p>
+
+        <h2>5. Contact</h2>
+        <p>
+            If you have any questions regarding this Privacy Policy, please feel free to contact me using the "message
+            me"
+            app on this site.
+        </p>
+    </div>
+</body>
+
+</html>
