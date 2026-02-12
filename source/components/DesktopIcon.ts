@@ -161,20 +161,34 @@ export class DesktopIcon {
   private handleClick(e: MouseEvent): void {
     e.stopPropagation();
 
+    // Use native browser click count if available (most reliable)
+    if (e.detail === 2) {
+      if (this.clickTimeout) {
+        clearTimeout(this.clickTimeout);
+        this.clickTimeout = null;
+      }
+      this.clickCount = 0;
+      this.handleDoubleClick();
+      return;
+    }
+
     this.clickCount++;
     selectionState.deselectAll();
-    selectionState.setIcons.bind(this);
 
+    // Manual double click detection fallback
     if (this.clickCount === 1) {
       // First click
       this.select();
+      // Increased timeout to 500ms for better mobile accessibility
       this.clickTimeout = setTimeout(() => {
         this.clickCount = 0;
-      }, 250);
+        this.clickTimeout = null;
+      }, 500);
     } else if (this.clickCount === 2) {
       // Double click
       if (this.clickTimeout) {
         clearTimeout(this.clickTimeout);
+        this.clickTimeout = null;
       }
       this.handleDoubleClick();
       this.clickCount = 0;
