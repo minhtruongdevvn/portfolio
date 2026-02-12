@@ -275,6 +275,22 @@ export const DESKTOP_ICONS: IconConfig[] = [
       { id: "properties", label: "Properties", action: "properties" },
     ],
   },
+  {
+    id: "gmail-ai",
+    name: "Gmail Cleaner AI",
+    icon: ICONS.robot,
+    column: "right",
+    position: { y: 520 },
+    contentType: "iframe",
+    contentData: {
+      url: `${BASE_URL}tabs/ai-chat.html`,
+    },
+    menuItems: [
+      { id: "open", label: "Open", action: "open" },
+      { type: "separator" },
+      { id: "properties", label: "Properties", action: "properties" },
+    ],
+  },
 ];
 
 export const TASKBAR_APPS: TaskbarAppConfig[] = [

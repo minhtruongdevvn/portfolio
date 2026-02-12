@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Email Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: rgba(99, 102, 241, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 24px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Animated background glow */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse,
+                    rgba(37, 99, 235, 0.15) 0%,
+                    transparent 70%);
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            margin: auto;
+        }
+
+        .icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg,
+                    rgba(37, 99, 235, 0.2),
+                    rgba(6, 182, 212, 0.15));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+        }
+
+        .icon-wrapper svg {
+            width: 38px;
+            height: 38px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e2e8f0, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .chat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 0;
+            backdrop-filter: blur(12px);
+            margin-bottom: 24px;
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Loader */
+        .loader-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--card-bg);
+            z-index: 10;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="icon-wrapper">
+            <!-- Robot Icon SVG -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="14" y="14" width="20" height="18" rx="2" fill="#B0BEC5" stroke="#607D8B" stroke-width="2" />
+                <circle cx="20" cy="22" r="2.5" fill="#1976D2" />
+                <circle cx="28" cy="22" r="2.5" fill="#1976D2" />
+                <rect x="19" y="27" width="10" height="2" rx="1" fill="#607D8B" />
+                <line x1="24" y1="14" x2="24" y2="10" stroke="#607D8B" stroke-width="2" />
+                <circle cx="24" cy="9" r="2" fill="#FF5722" />
+            </svg>
+        </div>
+
+        <h1>Gmail Cleaner AI</h1>
+        <p class="subtitle">
+            Contact me for access key through 'Message Me' app
+        </p>
+
+        <div class="chat-card">
+            <div class="loader-container" id="chat-loader">
+                <div class="loader"></div>
+            </div>
+            <iframe src="https://n8n.conrad-truong.online/webhook/5c2424aa-06d9-4eb8-bb8d-f00a7480a480/chat"
+                style="width: 100%; height: 100%; border: none;" title="AI Chat"
+                onload="document.getElementById('chat-loader').classList.add('hidden')"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
