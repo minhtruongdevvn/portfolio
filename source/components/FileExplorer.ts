@@ -121,10 +121,31 @@ export class FileExplorer extends Window {
     itemElement.appendChild(icon);
     itemElement.appendChild(name);
 
-    // Double-click handler
-    itemElement.addEventListener("dblclick", () =>
-      this.handleItemDoubleClick(item),
-    );
+    // Robust double-click handler for mobile/desktop
+    let clickCount = 0;
+    let clickTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    itemElement.addEventListener("click", (e) => {
+      // Native double click (Desktop/Modern Mobile)
+      if (e.detail === 2) {
+        if (clickTimeout) clearTimeout(clickTimeout);
+        this.handleItemDoubleClick(item);
+        clickCount = 0;
+        return;
+      }
+
+      // Manual detection fallback for mobile touch
+      clickCount++;
+      if (clickCount === 1) {
+        clickTimeout = setTimeout(() => {
+          clickCount = 0;
+        }, 500); // 500ms timeout for easier mobile tapping
+      } else if (clickCount === 2) {
+        if (clickTimeout) clearTimeout(clickTimeout);
+        this.handleItemDoubleClick(item);
+        clickCount = 0;
+      }
+    });
 
     return itemElement;
   }
