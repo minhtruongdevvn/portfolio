@@ -113,6 +113,22 @@ export const DESKTOP_ICONS: IconConfig[] = [
       { id: "properties", label: "Properties", action: "properties" },
     ],
   },
+  {
+    id: "about-app",
+    name: "About This App",
+    icon: ICONS.privacyPolicy,
+    column: "left",
+    position: { y: 420 },
+    contentType: "iframe",
+    contentData: {
+      url: `${BASE_URL}tabs/about.html`,
+    },
+    menuItems: [
+      { id: "open", label: "Open", action: "open" },
+      { type: "separator" },
+      { id: "properties", label: "Properties", action: "properties" },
+    ],
+  },
 
   // Middle icons
   {

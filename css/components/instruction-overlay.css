@@ -31,12 +31,13 @@
 }
 
 .instruction-subtext {
-  width: 200px;
-  opacity: 0.9;
+  width: 320px;
+  opacity: 0.95;
   text-align: center;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-  margin-left: 25px;
+  margin-left: 20px;
   margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .instruction-arrow-container {
@@ -88,10 +89,12 @@
 }
 
 @keyframes buttonBounce {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }

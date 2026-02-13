@@ -102,7 +102,10 @@ export class InstructionOverlay {
 
     const subtextDiv = document.createElement("div");
     subtextDiv.className = "instruction-subtext";
-    subtextDiv.textContent = "Click the Window button to start";
+    subtextDiv.innerHTML =
+      "<strong>Conrad Truong's Portfolio</strong><br>" +
+      "An interactive simulation of a desktop environment showcasing web development projects.<br><br>" +
+      "Click the Window button to start";
 
     // Arrow container
     const arrowDiv = document.createElement("div");

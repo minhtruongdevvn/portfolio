@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About This Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: rgba(99, 102, 241, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            padding: 40px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse,
+                    rgba(37, 99, 235, 0.15) 0%,
+                    transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #e2e8f0, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>About This Application</h1>
+
+        <h2>Purpose</h2>
+        <p>
+            This application is a <strong>Portfolio Website</strong> designed to demonstrate my skills as a Full Stack
+            Web Developer.
+            It simulates a desktop operating system interface in the browser to provide an interactive and engaging user
+            experience.
+        </p>
+        <p>
+            The primary goal of this application is to showcase my projects, technical capabilities, and professional
+            background to potential employers and clients.
+        </p>
+
+        <h2>Features</h2>
+        <ul>
+            <li><strong>Desktop Simulation:</strong> A fully functional desktop environment built with HTML, CSS, and
+                TypeScript.</li>
+            <li><strong>Window Management:</strong> Draggable, extensive, and minimized windows.</li>
+            <li><strong>File Explorer:</strong> A simulated file system to browse project files and documents.</li>
+            <li><strong>Interactive Apps:</strong> Various "apps" that showcase different projects and skills.</li>
+        </ul>
+
+        <h2>Data & Privacy</h2>
+        <p>
+            This application uses Google APIs solely for the purpose of authentication and/or accessing specific
+            portfolio-related content
+            (such as documents or media stored in Google Drive, if applicable). We do not store your personal data.
+        </p>
+        <p>
+            For more detailed information, please refer to our <a href="privacy-policy.html">Privacy Policy</a>.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+            Created by <strong>Conrad Truong</strong>. You can contact me through the "Message Me" app on the desktop or
+            via the contact information provided in my resume.
+        </p>
+    </div>
+</body>
+
+</html>
