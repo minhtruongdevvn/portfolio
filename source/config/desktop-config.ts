@@ -171,7 +171,7 @@ export const DESKTOP_ICONS: IconConfig[] = [
   },
   {
     id: "projects",
-    name: "Projects",
+    name: "Work Projects",
     icon: ICONS.projects,
     column: "middle",
     position: { y: 220 },

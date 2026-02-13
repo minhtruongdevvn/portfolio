@@ -126,6 +126,21 @@
             border: 1px solid rgba(251, 191, 36, 0.2);
         }
 
+        .live-link {
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--success);
+            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            transition: all 0.2s;
+        }
+
+        .live-link:hover {
+            background: var(--success);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
         /* --- Tech Stack Grid --- */
         .tech-grid {
             display: grid;
@@ -291,7 +306,16 @@
                         <span class="badge primary">Next.js 15</span>
                         <span class="badge primary">React 19</span>
                         <span class="badge primary">TypeScript</span>
-                        <span class="badge">Live Production</span>
+                        <a href="https://alumni-network-w437.vercel.app/" target="_blank" class="badge live-link">
+                            Live Production
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" style="margin-left: 6px;">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 <!-- Institute Logo Placeholder -->
