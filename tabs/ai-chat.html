@@ -1,183 +1,575 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Email Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-light: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.4);
-            --bg-dark: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
-            --border: rgba(99, 102, 241, 0.2);
-        }
+      :root {
+        --primary: #2563eb;
+        --primary-light: #3b82f6;
+        --primary-glow: rgba(59, 130, 246, 0.4);
+        --bg-dark: #0f172a;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --text-main: #e2e8f0;
+        --text-muted: #94a3b8;
+        --border: rgba(99, 102, 241, 0.2);
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: "Inter", sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 40px 24px;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg-dark);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 40px 24px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
 
-        /* Animated background glow */
-        body::before {
-            content: "";
-            position: fixed;
-            top: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(ellipse,
-                    rgba(37, 99, 235, 0.15) 0%,
-                    transparent 70%);
-            pointer-events: none;
-        }
+      /* Animated background glow */
+      body::before {
+        content: "";
+        position: fixed;
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 400px;
+        background: radial-gradient(
+          ellipse,
+          rgba(37, 99, 235, 0.15) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-            margin: auto;
-        }
+      .container {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+        margin: auto;
+      }
 
-        .icon-wrapper {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg,
-                    rgba(37, 99, 235, 0.2),
-                    rgba(6, 182, 212, 0.15));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
-        }
+      .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(
+          135deg,
+          rgba(37, 99, 235, 0.2),
+          rgba(6, 182, 212, 0.15)
+        );
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+      }
 
-        .icon-wrapper svg {
-            width: 38px;
-            height: 38px;
-        }
+      .icon-wrapper svg {
+        width: 38px;
+        height: 38px;
+      }
 
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #e2e8f0, #93c5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
+      h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #e2e8f0, #93c5fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+      }
 
-        .subtitle {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
+      .subtitle {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin-bottom: 32px;
+        line-height: 1.6;
+      }
 
-        .chat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 0;
-            backdrop-filter: blur(12px);
-            margin-bottom: 24px;
-            height: 600px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
+      .chat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 0;
+        backdrop-filter: blur(12px);
+        margin-bottom: 24px;
+        height: 600px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
 
-        /* Loader */
-        .loader-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--card-bg);
-            z-index: 10;
-            transition: opacity 0.5s ease-out, visibility 0.5s;
-        }
+      /* Loader */
+      .loader-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--card-bg);
+        z-index: 10;
+        transition:
+          opacity 0.5s ease-out,
+          visibility 0.5s;
+      }
 
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-        }
+      .loader {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        border-top-color: var(--primary);
+        animation: spin 1s ease-in-out infinite;
+      }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
         }
+      }
 
-        .hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+      .hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      /* Privacy & Data Usage Sections */
+      .info-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 16px;
+        backdrop-filter: blur(12px);
+        text-align: left;
+        overflow: hidden;
+      }
+
+      .info-section summary {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-light);
+        padding: 20px 24px;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.2s ease;
+        user-select: none;
+      }
+
+      .info-section summary:hover {
+        background: rgba(37, 99, 235, 0.05);
+      }
+
+      .info-section summary::after {
+        content: "▼";
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+        color: var(--text-muted);
+      }
+
+      .info-section[open] summary::after {
+        transform: rotate(-180deg);
+      }
+
+      .info-section summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .section-content {
+        padding: 0 24px 24px 24px;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .info-section h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--primary-light);
+        margin-bottom: 16px;
+      }
+
+      .info-section h3 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .info-section p,
+      .info-section ul {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+
+      .info-section ul {
+        padding-left: 20px;
+      }
+
+      .info-section li {
+        margin-bottom: 8px;
+      }
+
+      .highlight-box {
+        background: rgba(37, 99, 235, 0.1);
+        border-left: 3px solid var(--primary);
+        padding: 12px 16px;
+        margin: 16px 0;
+        border-radius: 4px;
+      }
+
+      .highlight-box strong {
+        color: var(--text-main);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="icon-wrapper">
-            <!-- Robot Icon SVG -->
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="14" y="14" width="20" height="18" rx="2" fill="#B0BEC5" stroke="#607D8B" stroke-width="2" />
-                <circle cx="20" cy="22" r="2.5" fill="#1976D2" />
-                <circle cx="28" cy="22" r="2.5" fill="#1976D2" />
-                <rect x="19" y="27" width="10" height="2" rx="1" fill="#607D8B" />
-                <line x1="24" y1="14" x2="24" y2="10" stroke="#607D8B" stroke-width="2" />
-                <circle cx="24" cy="9" r="2" fill="#FF5722" />
-            </svg>
-        </div>
+      <div class="icon-wrapper">
+        <!-- Robot Icon SVG -->
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect
+            x="14"
+            y="14"
+            width="20"
+            height="18"
+            rx="2"
+            fill="#B0BEC5"
+            stroke="#607D8B"
+            stroke-width="2"
+          />
+          <circle cx="20" cy="22" r="2.5" fill="#1976D2" />
+          <circle cx="28" cy="22" r="2.5" fill="#1976D2" />
+          <rect x="19" y="27" width="10" height="2" rx="1" fill="#607D8B" />
+          <line
+            x1="24"
+            y1="14"
+            x2="24"
+            y2="10"
+            stroke="#607D8B"
+            stroke-width="2"
+          />
+          <circle cx="24" cy="9" r="2" fill="#FF5722" />
+        </svg>
+      </div>
 
-        <h1>Gmail Cleaner AI</h1>
-        <p class="subtitle">
-            Contact me for ACCESS KEY through 'Message Me' app
-        </p>
+      <h1>Gmail Cleaner AI</h1>
+      <p class="subtitle">Contact me for ACCESS KEY through 'Message Me' app</p>
 
-        <div class="chat-card">
-            <div class="loader-container" id="chat-loader">
-                <div class="loader"></div>
-            </div>
-            <iframe src="https://n8n.conrad-truong.online/webhook/5c2424aa-06d9-4eb8-bb8d-f00a7480a480/chat"
-                style="width: 100%; height: 100%; border: none;" title="AI Chat"
-                onload="document.getElementById('chat-loader').classList.add('hidden')"></iframe>
+      <div class="chat-card">
+        <div class="loader-container" id="chat-loader">
+          <div class="loader"></div>
         </div>
+        <iframe
+          src="https://n8n.conrad-truong.online/webhook/5c2424aa-06d9-4eb8-bb8d-f00a7480a480/chat"
+          style="width: 100%; height: 100%; border: none"
+          title="AI Chat"
+          onload="
+            document.getElementById('chat-loader').classList.add('hidden')
+          "
+        ></iframe>
+      </div>
+
+      <!-- Privacy Policy & Data Usage Information -->
+      <details class="info-section">
+        <summary>Privacy Policy & Data Usage</summary>
+        <div class="section-content">
+          <div class="highlight-box">
+            <strong>Your Privacy is My Priority:</strong> This application does
+            not collect, store, or share any of your personal information or
+            email data. Your data will not be used for training AI models
+            according to
+            <a
+              href="https://docs.cloud.google.com/gemini/docs/discover/data-governance"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: var(--primary-light); text-decoration: underline"
+              >Gemini's data governance policy for paid API</a
+            >.
+          </div>
+
+          <h3>What Data I Access</h3>
+          <p>Gmail Cleaner AI requires access to your Gmail account to:</p>
+          <ul>
+            <li>Read email metadata and content for categorization purposes</li>
+            <li>
+              Identify and filter junk mail, promotional emails, and unwanted
+              subscriptions
+            </li>
+            <li>
+              Delete or unsubscribe from identified junk emails upon your
+              confirmation
+            </li>
+          </ul>
+
+          <h3>How I Use Your Data</h3>
+          <p>Your email data is used exclusively for the following purposes:</p>
+          <ul>
+            <li>
+              <strong>Email Categorization:</strong> AI analysis to
+              intelligently categorize your emails into relevant groups
+            </li>
+            <li>
+              <strong>Junk Mail Detection:</strong> Identify spam, promotional
+              content, and unwanted subscriptions
+            </li>
+            <li>
+              <strong>Automated Cleanup:</strong> Delete or unsubscribe from
+              junk mail with your explicit permission
+            </li>
+          </ul>
+
+          <h3>Data Retention & Security</h3>
+          <div class="highlight-box">
+            <strong>Zero Data Storage:</strong> I do not store any of your email
+            content or personal information on my servers.
+          </div>
+          <ul>
+            <li>
+              <strong>Immediate Token Deletion:</strong> OAuth access tokens are
+              deleted immediately after each task is completed
+            </li>
+            <li>
+              <strong>No Data Collection:</strong> I do not collect, log, or
+              retain any email content, metadata, or personal information
+            </li>
+            <li>
+              <strong>Secure Processing:</strong> All email analysis is
+              performed in real-time and data is discarded after processing
+            </li>
+            <li>
+              <strong>Private Infrastructure:</strong> This tool runs on private
+              infrastructure and is not accessible from the public internet
+            </li>
+          </ul>
+
+          <h3>Third-Party Services</h3>
+          <p>This application uses the following third-party services:</p>
+          <ul>
+            <li>
+              <strong>Google Gmail API:</strong> To access and manage your
+              emails (subject to Google's privacy policy)
+            </li>
+            <li>
+              <strong>Google Gemini AI (Paid Tier):</strong> For intelligent
+              email categorization. I use the paid version of Gemini, which
+              ensures your data is not used for model training or improvement
+              purposes
+            </li>
+          </ul>
+
+          <h3>Data Sharing</h3>
+          <div class="highlight-box">
+            <strong>No Third-Party Sharing:</strong> Your email data is never
+            shared with, sold to, or disclosed to any third parties.
+          </div>
+          <ul>
+            <li>
+              Email data is only sent to Google Gemini AI API for analysis and
+              is processed according to Google's enterprise data processing
+              terms
+            </li>
+            <li>
+              No data is stored, logged, or transmitted to any other external
+              services
+            </li>
+            <li>
+              No analytics, tracking, or monitoring tools are used on your email
+              data
+            </li>
+          </ul>
+
+          <h3>Your Control & Consent</h3>
+          <p>You maintain full control over your data:</p>
+          <ul>
+            <li>
+              <strong>Explicit Permission:</strong> The application only
+              accesses your Gmail when you explicitly grant permission via
+              Google OAuth
+            </li>
+            <li>
+              <strong>Revocable Access:</strong> You can revoke this
+              application's access to your Gmail at any time through your Google
+              Account settings
+            </li>
+            <li>
+              <strong>Confirmation Required:</strong> All deletion and
+              unsubscribe actions require your explicit confirmation
+            </li>
+          </ul>
+
+          <h3>Security Measures</h3>
+          <ul>
+            <li>Industry-standard OAuth 2.0 authentication</li>
+            <li>
+              Encrypted communication (HTTPS/TLS) for all data transmission
+            </li>
+            <li>
+              Limited scope access - only requests necessary Gmail permissions
+            </li>
+            <li>No persistent storage of credentials or tokens</li>
+            <li>Private deployment - not publicly accessible</li>
+          </ul>
+
+          <h3>Compliance</h3>
+          <p>This application complies with:</p>
+          <ul>
+            <li>Google API Services User Data Policy</li>
+            <li>Gmail API Terms of Service</li>
+            <li>Limited Use Requirements for Google API Scopes</li>
+          </ul>
+
+          <div class="highlight-box">
+            <strong>Contact:</strong> For questions about data usage or privacy,
+            please contact me through the "Message Me" app on this portfolio.
+          </div>
+        </div>
+      </details>
+
+      <!-- Terms of Service -->
+      <details class="info-section">
+        <summary>Terms of Service</summary>
+        <div class="section-content">
+          <h3>Acceptance of Terms</h3>
+          <p>
+            By using Gmail Cleaner AI, you agree to these terms. If you do not
+            agree, please do not use this application.
+          </p>
+
+          <h3>Description of Service</h3>
+          <p>
+            Gmail Cleaner AI is a personal productivity tool that helps you:
+          </p>
+          <ul>
+            <li>Automatically categorize your Gmail messages</li>
+            <li>Identify junk mail and unwanted subscriptions</li>
+            <li>
+              Clean up your inbox by deleting or unsubscribing from unwanted
+              emails
+            </li>
+          </ul>
+
+          <h3>User Responsibilities</h3>
+          <ul>
+            <li>
+              You are responsible for maintaining the confidentiality of your
+              Google account credentials
+            </li>
+            <li>
+              You should review AI suggestions before confirming any deletion or
+              unsubscribe actions
+            </li>
+          </ul>
+
+          <h3>Limitations of Liability</h3>
+          <p>
+            This service is provided "as is" without warranties. The developer
+            is not liable for:
+          </p>
+          <ul>
+            <li>Any emails incorrectly categorized or deleted</li>
+            <li>Any service interruptions or downtime</li>
+            <li>Any data loss (though I don't store your data anyway)</li>
+          </ul>
+
+          <h3>Service Modifications</h3>
+          <p>
+            I reserve the right to modify or discontinue the service at any time
+            without notice.
+          </p>
+
+          <h3>Termination</h3>
+          <p>
+            You may stop using the service at any time by revoking access
+            through your Google Account settings.
+          </p>
+        </div>
+      </details>
+
+      <!-- Scopes Disclosure -->
+      <details class="info-section">
+        <summary>Gmail API Permissions Disclosure</summary>
+        <div class="section-content">
+          <h3>Required Permissions</h3>
+          <p>This application requests the following Gmail API permissions:</p>
+          <ul>
+            <li>
+              <strong>Read emails:</strong> To analyze and categorize your
+              messages
+            </li>
+            <li>
+              <strong>Modify emails:</strong> To delete junk mail and mark
+              messages as read/unread
+            </li>
+            <li>
+              <strong>Send emails:</strong> To send unsubscribe requests on your
+              behalf (if applicable)
+            </li>
+          </ul>
+
+          <h3>Why These Permissions Are Needed</h3>
+          <p>Each permission serves a specific purpose:</p>
+          <ul>
+            <li>
+              <strong>Read access:</strong> Necessary to analyze email content
+              and identify junk mail patterns
+            </li>
+            <li>
+              <strong>Modify access:</strong> Required to delete identified junk
+              emails and update email status
+            </li>
+            <li>
+              <strong>Send access:</strong> Used only to send automated
+              unsubscribe requests to mailing lists
+            </li>
+          </ul>
+
+          <div class="highlight-box">
+            <strong>Limited Use Disclosure:</strong> Gmail Cleaner AI's use of
+            information received from Gmail APIs adheres to Google API Services
+            User Data Policy, including the Limited Use requirements. I only use
+            your Gmail data to provide the email cleaning service and do not
+            transfer it to any other applications.
+          </div>
+        </div>
+      </details>
     </div>
-</body>
-
+  </body>
 </html>
